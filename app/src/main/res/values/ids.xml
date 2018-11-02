@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- BaseItem -->
+    <item name="img_id" type="id" />
+    <item name="txt_id" type="id" />
+    <item name="arrow_id" type="id" />
+    <item name="right_text_id" type="id" />
+    <item name="red_text_id" type="id" />
+    <item name="handlerView" type="id"/>
+    <item name="guide_container" type="id"/>
+
+    <item name="iv_image_show_picker_del" type="id" />
+    <item name="iv_image_show_picker_pic" type="id" />
+</resources>

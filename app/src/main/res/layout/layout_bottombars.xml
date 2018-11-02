@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!--底部菜单Bar-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rg_tab"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <com.newdjk.bdmember.widget.BottomTabRadioButton
+        android:id="@+id/rb_tab1"
+        style="@style/RadioButtonBottomTab"
+        android:layout_marginTop="@dimen/dp_5"
+        android:checked="true"
+        android:drawableTop="@drawable/home_selectot"
+        android:text="@string/homeTextThem"
+        android:textColor="@color/bottombar_color_theme_gray"
+        android:textSize="@dimen/text_size_micro"
+        app:drawableHeights="16dp"
+        app:drawableWidths="16dp" />
+
+    <com.newdjk.bdmember.widget.BottomTabRadioButton
+        android:id="@+id/rb_tab2"
+        style="@style/RadioButtonBottomTab"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableTop="@drawable/monitor_selectot"
+        android:text="@string/onlineTextThem"
+        android:textColor="@color/bottombar_color_theme_gray"
+        android:textSize="@dimen/text_size_micro"
+        app:drawableHeights="16dp"
+        app:drawableWidths="16dp" />
+
+    <com.newdjk.bdmember.widget.BottomTabRadioButton
+        android:id="@+id/rb_tab3"
+        style="@style/RadioButtonBottomTab"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableTop="@drawable/message_selectot"
+        android:text="@string/contractTextThem"
+        android:textColor="@color/bottombar_color_theme_gray"
+        android:textSize="@dimen/text_size_micro"
+        app:drawableHeights="16dp"
+        app:drawableWidths="16dp" />
+
+    <com.newdjk.bdmember.widget.BottomTabRadioButton
+        android:id="@+id/rb_tab4"
+        style="@style/RadioButtonBottomTab"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableTop="@drawable/message_selectot"
+        android:text="@string/healthTextThem"
+        android:textColor="@color/bottombar_color_theme_gray"
+        android:textSize="@dimen/text_size_micro"
+        app:drawableHeights="16dp"
+        app:drawableWidths="16dp" />
+
+    <com.newdjk.bdmember.widget.BottomTabRadioButton
+        android:id="@+id/rb_tab5"
+        style="@style/RadioButtonBottomTab"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableTop="@drawable/personal_selectot"
+        android:text="@string/mineTextThem"
+        android:textColor="@color/bottombar_color_theme_gray"
+        android:textSize="@dimen/text_size_micro"
+        app:drawableHeights="16dp"
+        app:drawableWidths="16dp" />
+
+
+</LinearLayout>

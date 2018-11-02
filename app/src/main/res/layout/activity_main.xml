@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/sv_activity"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/include1" />
+
+    <!--底部菜单Bar-->
+    <include
+        android:id="@+id/include1"
+        layout="@layout/layout_bottombars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_1"
+        android:layout_alignParentBottom="true" />
+
+
+</RelativeLayout>
