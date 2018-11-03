@@ -10,13 +10,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.newdjk.bdmember.R;
+import com.youth.banner.loader.ImageLoaderInterface;
 
 
 /**
  * Created by WQ on 2017/5/5.
  */
 
-public class GlideMediaLoader implements ImageLoaderInterface  {
+public class GlideMediaLoader implements ImageLoaderInterface {
 
     public static void load(Object context, View imgview, String path, int placeholder) {
         if (!String.valueOf(path).startsWith("http")) {
@@ -31,12 +32,12 @@ public class GlideMediaLoader implements ImageLoaderInterface  {
     }
 
     public static void load(Object context, View imgview, String path) {
-        load(context, imgview, path, R.drawable.new_nopic);
+        load(context, imgview, path, R.mipmap.new_nopic);
     }
 
 
     public static void loadPhoto(Object context, View imgview, String path) {
-        load(context, imgview, path, R.drawable.icon_patient);
+        load(context, imgview, path, R.mipmap.icon_patient);
     }
 
 

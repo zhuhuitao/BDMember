@@ -11,16 +11,28 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.bilibili.boxing.Boxing;
+import com.bilibili.boxing.model.config.BoxingConfig;
+import com.bilibili.boxing.model.entity.BaseMedia;
 import com.google.gson.Gson;
+import com.lxq.okhttp.response.GsonResponseHandler;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
+import com.newdjk.bdmember.bean.Entity;
+import com.newdjk.bdmember.bean.PicturePathEntity;
+import com.newdjk.bdmember.bean.ResponseEntity;
+import com.newdjk.bdmember.bean.SuggesttionEntity;
+import com.newdjk.bdmember.ui.activity.MyBoxingActivity;
 import com.newdjk.bdmember.utils.Contants;
+import com.newdjk.bdmember.utils.DisplayUtil;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.ImageBase64;
 import com.newdjk.bdmember.utils.SpUtils;
 import com.newdjk.bdmember.utils.StrUtil;
 import com.newdjk.bdmember.widget.CommonMethod;
 import com.newdjk.bdmember.widget.LoadDialog;
+import com.newdjk.bdmember.widget.MultiImageUploadView;
+import com.newdjk.bdmember.widget.RoundImageUploadView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -70,7 +82,7 @@ public class SuggestionActivity extends BasicActivity {
 
     @Override
     protected void initView() {
-        initTitle("意见反馈").setLeftImage(R.drawable.head_back_n).setLeftOnClickListener(new View.OnClickListener() {
+        initTitle("意见反馈").setLeftImage(R.mipmap.head_back_n).setLeftOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -93,7 +105,7 @@ public class SuggestionActivity extends BasicActivity {
         uploadView.setMax(6);
         uploadView.setNumCol(4);
         uploadView.setImgMargin(DisplayUtil.dp2px(this, 10));
-        uploadView.setCloseHandlerImage(R.drawable.ic_delete_photo);
+        uploadView.setCloseHandlerImage(R.mipmap.ic_delete_photo);
         uploadView.setOnImageChangeListener(new MultiImageUploadView.OnImageChangeListener() {
             @Override
             public void onImageChage(List<File> imgFiles, int maxSize) {
@@ -119,7 +131,7 @@ public class SuggestionActivity extends BasicActivity {
 
     private void startSelectImage() {
         BoxingConfig mulitImgConfig = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG)
-                .needCamera(R.drawable.ic_camera)
+                .needCamera(R.mipmap.ic_camera)
                 .needGif()
                 .withMaxCount(uploadView.getMax() - uploadView.getFiles().size());
         Boxing.of(mulitImgConfig).

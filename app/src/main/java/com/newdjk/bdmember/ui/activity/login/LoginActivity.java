@@ -118,6 +118,8 @@ public class LoginActivity extends BasicActivity {
         relatePwd.setVisibility(View.VISIBLE);
         loginType = "2";
         CrashReport.testJavaCrash();
+
+        addWindowManger(this);
     }
 
     @Override
@@ -217,7 +219,7 @@ public class LoginActivity extends BasicActivity {
                                         myShared(data);
                                         myJpush();
                                         toActivity(MainActivity.getAct(mContext));
-                                        finish();
+                                        noAnimFinish();
                                     }
                                     toast(entituy.getMessage());
                                 }
@@ -285,7 +287,6 @@ public class LoginActivity extends BasicActivity {
                         myShared(data);
                         myJpush();
                         toActivity(MainActivity.getAct(mContext));
-                        finish();
                     }
                     toast(getString(R.string.loginSuccess));
                 }
@@ -479,4 +480,8 @@ public class LoginActivity extends BasicActivity {
         }
     }
 
+    @Override
+    public void addWindowManger(BasicActivity activity) {
+        super.addWindowManger(activity);
+    }
 }

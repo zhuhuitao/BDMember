@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.newdjk.bdmember">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -10,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.login.LoginActivity"
+        <activity
+            android:name=".ui.activity.login.LoginActivity"
             android:theme="@style/MyAppThem">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,29 +26,71 @@
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/MyAppThem"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.activity.RegisterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/MyAppThem"/>
+            android:theme="@style/MyAppThem" />
         <activity
             android:name=".ui.activity.login.ResettingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/MyAppThem"/>
+            android:theme="@style/MyAppThem" />
 
         <activity
             android:name=".ui.activity.login.ForgetActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/MyAppThem"/>
+            android:theme="@style/MyAppThem" />
 
-        <activity android:name=".ui.activity.mine.PersonalDataActivity"
+        <activity
+            android:name=".ui.activity.mine.PersonalDataActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.activity.mine.SystemSettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem" />
+
+        <activity
+            android:name=".ui.activity.mine.AboutUsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem" />
+
+        <activity
+            android:name=".ui.activity.mine.ModifyMobileActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem" />
+
+        <activity
+            android:name=".ui.activity.mine.ModifyPasswordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem" />
+
+        <activity
+            android:name=".ui.activity.mine.WebViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem" />
+
+        <activity
+            android:name=".ui.activity.mine.SuggestionActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem" />
+
+        <activity
+            android:name=".ui.activity.ChatActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem"/>
 
     </application>
 

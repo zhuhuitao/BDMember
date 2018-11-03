@@ -397,7 +397,7 @@
 
     <style name="ll_activity" parent="ll_vertical_match_match">
         <item name="android:fitsSystemWindows">true</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/activity_bg</item>
     </style>
     <!-- linearLayout vertical >>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
@@ -679,7 +679,43 @@
 
     </declare-styleable>
 
+    <style name="match_parent">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
 
+    <style name="wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="match_match_vertical">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="match_match_horizontal" parent="match_parent">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="wrap_content_vertical" parent="wrap_content">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="wrap_content_horizontal" parent="wrap_content">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="height_parent_width_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="height_content_width_parent">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
 
 
 </resources>

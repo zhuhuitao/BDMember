@@ -100,6 +100,10 @@ dependencies {
     implementation rootProject.ext.dependencies["jcore"]
     implementation rootProject.ext.dependencies['jsWebView']
     implementation rootProject.ext.dependencies["wxOpen"]
+    implementation rootProject.ext.dependencies["bili"]
+    implementation rootProject.ext.dependencies['banner']
+    implementation rootProject.ext.dependencies["SmartRefreshLayout"]
+    implementation rootProject.ext.dependencies["SmartRefreshHeader"]
     //腾讯bugly日志
     implementation rootProject.ext.dependencies["crashreport"]
     implementation rootProject.ext.dependencies["crashreport-native"]

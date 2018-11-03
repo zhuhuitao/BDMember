@@ -61,4 +61,18 @@
     <string name="serviceEmail">客服邮箱:service@site.com</string>
     <string name="currentVersion">当前版本：v2.1.1</string>
     <string name="customerAgreement">《用户服务协议》</string>
+    <string name="me_tool10">系统设置</string>
+    <string name="home_et_hint">疾病、医院、科室、医生</string>
+    <string name="home_item_first_text1">互联网医院</string>
+    <string name="home_item_first_text2">签约服务</string>
+    <string name="home_item_first_text3">居民健康 </string>
+    <string name="home_item_first_text4">健康监测</string>
+    <string name="home_item_second_text1">预约挂号</string>
+    <string name="home_item_second_text2">智能导诊</string>
+    <string name="home_item_second_text3">视频问诊</string>
+    <string name="home_item_second_text4">图文问诊</string>
+    <string name="home_item_second_text5">护理咨询</string>
+    <string name="home_item_second_text6">康复指导</string>
+    <string name="home_item_second_text7">在线续方</string>
+    <string name="home_item_second_text8">健康资讯</string>
 </resources>

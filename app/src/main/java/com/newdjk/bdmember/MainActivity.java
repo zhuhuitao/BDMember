@@ -13,10 +13,11 @@ import com.newdjk.bdmember.ui.fragment.ContractFragment;
 import com.newdjk.bdmember.ui.fragment.HealthFragment;
 import com.newdjk.bdmember.ui.fragment.HomeFragment;
 import com.newdjk.bdmember.basic.BasicActivity;
-import com.newdjk.bdmember.ui.fragment.MineFragment;
+import com.newdjk.bdmember.ui.fragment.MinFragment;
 import com.newdjk.bdmember.ui.fragment.OnlineFragment;
 import com.newdjk.bdmember.widget.BottomTabRadioButton;
 import com.newdjk.bdmember.widget.FragmentController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,8 +77,10 @@ public class MainActivity extends BasicActivity {
         listFragment.add(OnlineFragment.getFragment());
         listFragment.add(ContractFragment.getFragment());
         listFragment.add(HealthFragment.getFragment());
-        listFragment.add(MineFragment.getFragment());
+        listFragment.add(MinFragment.getFragment());
         fgtController = new FragmentController(this, R.id.fl_main, listFragment);
+
+        addWindowManger(this);
     }
 
     @Override
@@ -165,7 +168,7 @@ public class MainActivity extends BasicActivity {
 //                mFunctionFragment.canGoBackWebView();
 //                return;
 //            }
-            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.exitApp, Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
         } else {
             killAll();
@@ -175,7 +178,7 @@ public class MainActivity extends BasicActivity {
 
     public void exitNoTip() {
         if ((System.currentTimeMillis() - exitTime) > 2000) {
-            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.exitApp), Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
         } else {
             killAll();
@@ -191,5 +194,10 @@ public class MainActivity extends BasicActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void addWindowManger(BasicActivity activity) {
+        super.addWindowManger(activity);
     }
 }

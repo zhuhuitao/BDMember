@@ -6,7 +6,9 @@ import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.newdjk.bdmember.R;
+import com.newdjk.bdmember.utils.DisplayUtil;
 
 
 /**

@@ -20,6 +20,8 @@ import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.PatientEntity;
 import com.newdjk.bdmember.ui.activity.mine.PersonalDataActivity;
+import com.newdjk.bdmember.ui.activity.mine.SystemSettingActivity;
+import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.utils.Contants;
 import com.newdjk.bdmember.utils.GlideMediaLoader;
 import com.newdjk.bdmember.utils.HttpUrl;

@@ -1,6 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/ll_activity"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_home_titlebar" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout style="@style/match_match_vertical">
+
+        <android.support.v4.widget.NestedScrollView style="@style/match_match">
+
+            <LinearLayout style="@style/match_match_vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/mBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_150" />
+
+                <include layout="@layout/layout_home_first_item" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_recyclerView"
+                    style="@style/height_content_width_parent"
+                    android:layout_marginTop="@dimen/dp_35" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
 </LinearLayout>

@@ -281,7 +281,7 @@ public abstract class BasicActivity<T> extends FragmentActivity implements View.
             startActivityForResult(intent, requestCode);
         }
         if (showAnimation) {
-            overridePendingTransition(R.anim.right_push_in, R.anim.hold);
+            overridePendingTransition(R.anim.in_right, R.anim.out_left);
         } else {
             overridePendingTransition(R.anim.null_anim, R.anim.null_anim);
         }
@@ -306,12 +306,21 @@ public abstract class BasicActivity<T> extends FragmentActivity implements View.
         super.onBackPressed();
     }
 
+    public void noAnimFinish() {
+        super.finish();
+    }
+
+    public void AnimFinish() {
+        this.finish();
+    }
+
+
     @Override
     public void finish() {
         super.finish();//必须写在最前才能显示自定义动画
         if (enterAnim > 0 && exitAnim > 0) {
             try {
-                overridePendingTransition(enterAnim, exitAnim);
+                overridePendingTransition(R.anim.in_left, R.anim.out_right);
             } catch (Exception e) {
                 logE("finish overridePendingTransition(enterAnim, exitAnim);" +
                         " >> catch (Exception e) {  " + e.getMessage());
@@ -325,13 +334,14 @@ public abstract class BasicActivity<T> extends FragmentActivity implements View.
      */
     protected void killAll() {
         List<BasicActivity> copy;
+
         synchronized (mActivities) {
             copy = new LinkedList<BasicActivity>(mActivities);
         }
         for (BasicActivity activity : copy) {
             activity.finish();
         }
-      //  android.os.Process.killProcess(android.os.Process.myPid());
+        //  android.os.Process.killProcess(android.os.Process.myPid());
     }
     //手机返回键和菜单键实现同点击标题栏左右按钮效果>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -340,7 +350,8 @@ public abstract class BasicActivity<T> extends FragmentActivity implements View.
     protected void onDestroy() {
         super.onDestroy();
         synchronized (mActivities) {
-            mActivities.remove(this);
+            if (mActivities.contains(this))
+                mActivities.remove(this);
         }
         LoadDialog.clear();
         EventBus.getDefault().unregister(this);//
@@ -393,9 +404,10 @@ public abstract class BasicActivity<T> extends FragmentActivity implements View.
      *
      * @param activity
      */
-    public void windowManger(BasicActivity activity) {
+    public void addWindowManger(BasicActivity activity) {
         synchronized (mActivities) {
-            mActivities.add(activity);
+            if (!mActivities.contains(activity))
+                mActivities.add(activity);
         }
     }
 
