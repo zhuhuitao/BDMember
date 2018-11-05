@@ -245,10 +245,10 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall {
         mHomePublicActivitiesAdapter = new HomePublicActivitiesAdapter(mPulicActivitiesList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        DividerItemDecoration divider1 = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        divider1.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.custom_divider));
+//        DividerItemDecoration divider1 = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
+//        divider1.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.custom_divider));
         homePublicActivitiesRecyclerView.setLayoutManager(layoutManager);
-        homePublicActivitiesRecyclerView.addItemDecoration(divider1);
+//        homePublicActivitiesRecyclerView.addItemDecoration(divider1);
         homePublicActivitiesRecyclerView.setAdapter(mHomePublicActivitiesAdapter);
 
     }
