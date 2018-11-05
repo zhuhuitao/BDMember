@@ -190,7 +190,6 @@
     <color name="drop_down_unselected">#808080</color>
 
 
-
     <!--字体颜色-->
     <!--rgb 201 201 201-->
     <color name="font_hint">#C9C9C9</color>
@@ -274,5 +273,9 @@
     <color name="agree_book_bg_color">#F3F3F3</color>
     <color name="agree_book_content_color">#000000</color>
     <color name="chat_more_text_color">#1b1b1b</color>
+
+    <color name="home_orange">#FFA416</color>
+    <color name="deep_gray_text">#666666</color>
+    <color name="shallow_gray_text">#999999</color>
 
 </resources>

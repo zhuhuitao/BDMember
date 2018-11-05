@@ -75,4 +75,10 @@
     <string name="home_item_second_text6">康复指导</string>
     <string name="home_item_second_text7">在线续方</string>
     <string name="home_item_second_text8">健康资讯</string>
+    <string name="home_hot_service">热门服务</string>
+    <string name="pregnant_mother_service_package_name">孕妈服务包二</string>
+    <string name="recommendation_famous_doctor">名医推荐</string>
+    <string name="more">更多</string>
+    <string name="recommendation_famous_nurse">金牌护士</string>
+    <string name="public_activities">公益活动</string>
 </resources>

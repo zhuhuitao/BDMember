@@ -699,7 +699,7 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="wrap_content_vertical" parent="wrap_content">
+    <style name="wrap_content_vertical" parent="height_content_width_parent">
         <item name="android:orientation">vertical</item>
     </style>
 

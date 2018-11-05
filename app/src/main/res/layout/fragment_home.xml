@@ -4,23 +4,36 @@
 
     <include layout="@layout/layout_home_titlebar" />
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout style="@style/match_match_vertical">
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/home_smart_refresh_layout"
+        style="@style/match_match_vertical">
 
         <android.support.v4.widget.NestedScrollView style="@style/match_match">
 
             <LinearLayout style="@style/match_match_vertical">
 
                 <com.youth.banner.Banner
-                    android:id="@+id/mBanner"
+                    android:id="@+id/banner_first"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_150" />
+                    android:layout_height="@dimen/dp_150"
+                    android:background="@mipmap/ic_group2" />
 
                 <include layout="@layout/layout_home_first_item" />
+
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/home_recyclerView"
                     style="@style/height_content_width_parent"
                     android:layout_marginTop="@dimen/dp_35" />
+
+                <include layout="@layout/layout_home_third_item" />
+
+                <include layout="@layout/layout_home_fourth_item" />
+
+                <include layout="@layout/layout_home_fifth_item" />
+
+                <include layout="@layout/layout_home_sixth_item" />
+
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

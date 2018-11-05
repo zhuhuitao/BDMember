@@ -31,7 +31,7 @@ public class HomeRecyclerViewFirstAdapter extends RecyclerView.Adapter<HomeRecyc
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_home_recylerview, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_home_recylerview, viewGroup, false);
         return new MyViewHolder(view);
     }
 
@@ -54,8 +54,7 @@ public class HomeRecyclerViewFirstAdapter extends RecyclerView.Adapter<HomeRecyc
     class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item)
         TextView item;
-        @BindView(R.id.line)
-        View line;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_36"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
 
     <LinearLayout
@@ -19,6 +20,7 @@
             android:drawableTop="@mipmap/ic_home_item_second_1"
             android:gravity="center"
             android:text="@string/home_item_second_text1"
+            android:drawablePadding="@dimen/dp_10"
             android:textColor="@android:color/black"
             android:textSize="@dimen/sp_14" />
 

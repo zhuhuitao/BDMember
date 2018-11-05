@@ -2,31 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/wrap_content_vertical"
     android:background="@android:color/white"
-    android:padding="@dimen/dp_20">
+    android:paddingTop="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_20">
 
-    <LinearLayout style="@style/match_match_horizontal">
-
-        <TextView
-            android:id="@+id/item"
-            style="@style/wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@mipmap/ic_home_item_second_1"
-            android:gravity="center"
-            android:text="@string/home_item_second_text1"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/sp_14" />
-
-        <View
-            android:id="@+id/line"
-            android:layout_width="@dimen/dp_1"
-            android:layout_height="match_parent"
-            android:background="@color/activity_bg" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:background="@color/activity_bg" />
+    <TextView
+        android:id="@+id/item"
+        style="@style/match_match"
+        android:drawableTop="@mipmap/ic_home_item_second_1"
+        android:drawablePadding="@dimen/dp_10"
+        android:gravity="center"
+        android:text="@string/home_item_second_text1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp_14" />
 
 
 </LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/height_content_width_parent"
+    android:layout_marginRight="@dimen/dp_5"
+    android:layout_marginBottom="@dimen/dp_5"
+    android:paddingBottom="@dimen/dp_1"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/dp_5"
+    app:cardElevation="@dimen/dp_5">
+
+    <LinearLayout
+        android:id="@+id/mContainer"
+        style="@style/height_content_width_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.newdjk.bdmember.widget.CircleImageView
+            android:id="@+id/mPhoto"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_4" />
+
+        <TextView
+            android:id="@+id/mName"
+            style="@style/wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/mHospitalName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_33"
+            android:background="@color/famous_doctor_bg"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/mDepartmentName"
+            style="@style/wrap_content"
+            android:textColor="@color/font_gray_3"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            style="@style/wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/wrap_content"
+                android:text="好评率: "
+                android:textColor="@color/font_gray_5"
+                android:textSize="10sp" />
+
+
+            <TextView
+                android:id="@+id/mPraiseRate"
+                style="@style/wrap_content"
+                android:textColor="@color/font_praiseRate"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/wrap_content"
+                android:text="问诊量: "
+                android:textColor="@color/font_gray_5"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/mConsultCount"
+                style="@style/wrap_content"
+                android:textColor="@color/font_praiseRate"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
