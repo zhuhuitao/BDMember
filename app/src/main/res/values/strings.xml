@@ -81,4 +81,11 @@
     <string name="more">更多</string>
     <string name="recommendation_famous_nurse">金牌护士</string>
     <string name="public_activities">公益活动</string>
+    <string name="health_government">健康政务</string>
+    <string name="healthGovernmentThem">深圳市人力资源与社会保障体系关于社保上线的通知</string>
+    <string name="timeModel">2018-12-07 10:00</string>
+    <string name="networkError">网络错误</string>
+    <string name="activitiesName">中医养生专属活动</string>
+    <string name="signUp">115人已报名</string>
+    <string name="singUp_ed">人已报名</string>
 </resources>

@@ -5,9 +5,8 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        style="@style/height_content_width_parent"
-        android:background="@android:color/white"
-        android:padding="@dimen/dp_10">
+        style="@style/home_title_padding"
+        android:background="@android:color/white">
 
         <TextView
             style="@style/wrap_content"
@@ -38,5 +37,5 @@
         android:id="@+id/home_recommendation_famous_doctor_recyclerView"
         style="@style/height_content_width_parent"
         android:layout_marginTop="@dimen/dp_1"
-        android:padding="@dimen/dp_10"/>
+        android:padding="@dimen/dp_15" />
 </LinearLayout>

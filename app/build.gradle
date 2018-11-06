@@ -109,4 +109,5 @@ dependencies {
     implementation rootProject.ext.dependencies["crashreport"]
     implementation rootProject.ext.dependencies["crashreport-native"]
     implementation project(':okhttp')
+    implementation files('libs/alipaySdk-20180601.jar')
 }

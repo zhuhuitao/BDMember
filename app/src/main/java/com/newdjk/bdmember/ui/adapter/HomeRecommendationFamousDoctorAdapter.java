@@ -1,5 +1,6 @@
 package com.newdjk.bdmember.ui.adapter;
 
+
 import android.support.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
@@ -7,6 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.bean.FamousDoctorOrNurseEntity;
+import com.newdjk.bdmember.utils.HomeItemClickListener;
 import com.newdjk.bdmember.widget.CircleImageView;
 
 
@@ -14,9 +16,11 @@ import java.util.List;
 
 public class HomeRecommendationFamousDoctorAdapter extends BaseQuickAdapter<FamousDoctorOrNurseEntity.DataBean, BaseViewHolder> {
     private int mType;
+    private HomeItemClickListener mListener;
 
-    public HomeRecommendationFamousDoctorAdapter(@Nullable List<FamousDoctorOrNurseEntity.DataBean> data) {
+    public HomeRecommendationFamousDoctorAdapter(@Nullable List<FamousDoctorOrNurseEntity.DataBean> data, HomeItemClickListener listener) {
         super(R.layout.adapter_home_famous_doctor_, data);
+        this.mListener = listener;
     }
 
     public void setmType(int type) {
@@ -37,6 +41,6 @@ public class HomeRecommendationFamousDoctorAdapter extends BaseQuickAdapter<Famo
         helper.setBackgroundRes(R.id.mHospitalName, mType == 1 ? R.color.famous_doctor_bg : R.color.famous_nurse_bg);
         helper.setText(R.id.mPraiseRate, item.getPraiseRate() + "%");
         helper.setText(R.id.mConsultCount, item.getConsultCount() + "");
-        helper.addOnClickListener(R.id.mContainer);
+        helper.getView(R.id.mContainer).setOnClickListener(v -> mListener.homeItemListener(HomeItemClickListener.homeFamousDoctor, item));
     }
 }

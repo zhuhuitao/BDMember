@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.bean.HomeItemBean;
+import com.newdjk.bdmember.utils.HomeItemClickListener;
 import com.newdjk.bdmember.utils.ItemOnClickCall;
 
 import butterknife.BindView;
@@ -20,12 +21,12 @@ public class HomeRecyclerViewFirstAdapter extends RecyclerView.Adapter<HomeRecyc
 
     private Context mContext;
     private HomeItemBean mItemBean;
-    private ItemOnClickCall mItemClick;
+    private HomeItemClickListener mListener;
 
-    public HomeRecyclerViewFirstAdapter(Context context, ItemOnClickCall itemOnClickCall) {
+    public HomeRecyclerViewFirstAdapter(Context context, HomeItemClickListener mListener) {
         this.mContext = context;
         this.mItemBean = new HomeItemBean();
-        this.mItemClick = itemOnClickCall;
+        this.mListener = mListener;
     }
 
     @NonNull
@@ -42,7 +43,7 @@ public class HomeRecyclerViewFirstAdapter extends RecyclerView.Adapter<HomeRecyc
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             myViewHolder.item.setCompoundDrawables(null, drawable, null, null);
             myViewHolder.item.setText(mItemBean.mListText.get(i));
-            myViewHolder.item.setOnClickListener(v -> mItemClick.itemClickListener());
+            myViewHolder.item.setOnClickListener(v -> mListener.homeItemListener(HomeItemClickListener.homeNavigateSecond, i));
         }
     }
 

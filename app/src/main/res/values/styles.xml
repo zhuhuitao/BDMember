@@ -718,4 +718,12 @@
     </style>
 
 
+    <style name="home_title_padding" parent="height_content_width_parent">
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingRight">@dimen/dp_15</item>
+        <item name="android:paddingBottom">@dimen/dp_10</item>
+        <item name="android:paddingLeft">@dimen/dp_10</item>
+    </style>
+
+
 </resources>

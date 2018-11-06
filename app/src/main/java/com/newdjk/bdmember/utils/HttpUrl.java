@@ -1,7 +1,8 @@
 package com.newdjk.bdmember.utils;
 
 public class HttpUrl {
-//    public static String ip = "http://172.18.30.4";//？测试环境
+    //18702072346   adp
+    //public static String ip = "http://172.18.30.4";//？测试环境
     public static String ip = "http://api.newstarthealth.cn";//？正式环境
 
 
@@ -68,15 +69,17 @@ public class HttpUrl {
     public static String DeletePatientVisit = PatientAccount + "/DeletePatientVisit";
     //    POST PatientAccount/SavePatientVisit 保存会员就诊人信息(新增或者修改)
     public static String SavePatientVisit = PatientAccount + "/SavePatientVisit";
+    //公益活动
+    public static String PublicWelfareActivity = PlatFormAPI + "/PublicWelfareActivity";
 
     //首页
     public static String QueryDoctorInfoForHot = Doctor + "/QueryDoctorInfoForHot";
     //首页的ad
     public static String QueryAdBannerInfo = Banner + "/Ads/QueryAdsList";
     //修改登陆的手机号码
-    public static String ModifyMobile =PlatFormAPI+ "/PatientAccount/ChangeAccountMobile";
+    public static String ModifyMobile = PlatFormAPI + "/PatientAccount/ChangeAccountMobile";
 
-    public static String ModifyPassword =PlatFormAPI+ "/PatientAccount/ChangePatientPasswordByMobile";
+    public static String ModifyPassword = PlatFormAPI + "/PatientAccount/ChangePatientPasswordByMobile";
 
     //意见与反馈图片上传
     public static String FeedbackImgLoad = PlatFormAPI + "/DoctorPatient/FeedBackImgUpload";
@@ -91,11 +94,18 @@ public class HttpUrl {
     //病历
     public static String ReportImageUpload = PatientArchives + "/ReportImageUpload"; //患者病历上传
     //get Area
-    public static String QueryAreaByParentId = Area +"QueryAreaByParentId";
+    public static String QueryAreaByParentId = Area + "QueryAreaByParentId";
     // get hot city
-    public static String QueryHostArea = Area +"QueryHostArea";
+    public static String QueryHostArea = Area + "QueryHostArea";
 
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
     public static String DefaultPatient = PatientAccount + "/QueryDefaultPatientByAccountId";
+
+    public static String GetPublicWelfareActivitys = PublicWelfareActivity+"/GetPublicWelfareActivitys";
+
+
+    public static String localHost = "http://172.18.30.4";//？测试环境
+
+
 }
