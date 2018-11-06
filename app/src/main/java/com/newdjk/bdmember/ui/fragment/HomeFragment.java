@@ -1,9 +1,11 @@
 package com.newdjk.bdmember.ui.fragment;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,7 +24,6 @@ import com.lxq.okhttp.response.GsonResponseHandler;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.AdBannerInfo;
-import com.newdjk.bdmember.bean.Entity;
 import com.newdjk.bdmember.bean.FamousDoctorOrNurseEntity;
 import com.newdjk.bdmember.bean.HealthGovernmentEntity;
 import com.newdjk.bdmember.bean.PublicActivitiesEntity;
@@ -37,7 +38,9 @@ import com.newdjk.bdmember.utils.HomeItemClickListener;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.ItemOnClickCall;
 import com.newdjk.bdmember.utils.LogUtils;
+import com.newdjk.bdmember.utils.SystemUitl;
 import com.newdjk.bdmember.widget.CommonMethod;
+import com.newdjk.bdmember.widget.UpdateManage;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -46,13 +49,11 @@ import com.youth.banner.Transformer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static com.newdjk.bdmember.R.integer.home_public_activities;
 
 public class HomeFragment extends BasicFragment implements ItemOnClickCall, HomeItemClickListener {
 
@@ -144,6 +145,9 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         obtainPublicActivitiesDate();
         obtainRecommendationFamousDoctorDate();
         obtainRecommendationFamousNurseDate();
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_APN_SETTINGS,Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        UpdateManage manager = new UpdateManage(getContext(),"http://www.yihuan100.com/app/zhiyoukong/zhiyoukong.apk");
+        manager.showDownloadDialog();
     }
 
     private void obtainPublicActivitiesDate() {
