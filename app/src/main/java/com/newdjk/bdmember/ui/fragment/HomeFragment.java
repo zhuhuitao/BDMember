@@ -1,11 +1,11 @@
 package com.newdjk.bdmember.ui.fragment;
 
-import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -38,13 +38,13 @@ import com.newdjk.bdmember.utils.HomeItemClickListener;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.ItemOnClickCall;
 import com.newdjk.bdmember.utils.LogUtils;
-import com.newdjk.bdmember.utils.SystemUitl;
 import com.newdjk.bdmember.widget.CommonMethod;
-import com.newdjk.bdmember.widget.UpdateManage;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +55,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class HomeFragment extends BasicFragment implements ItemOnClickCall, HomeItemClickListener {
+public class HomeFragment extends BasicFragment implements ItemOnClickCall, HomeItemClickListener, Handler.Callback {
 
 
     @BindView(R.id.tv_left)
@@ -107,6 +107,8 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
     RecyclerView homePublicActivitiesRecyclerView;
     @BindView(R.id.home_health_government_recyclerView)
     RecyclerView homeHealthGovernmentRecyclerView;
+    @BindView(R.id.tv_content_flag)
+    TextView tvContentFlag;
 
     private HomePregnantMotherServicePackageAdapter mHomePregnantMotherServicePackageAdapter;
     private HomeRecommendationFamousDoctorAdapter mHomeRecommendationFamousDoctorAdapter;
@@ -115,8 +117,12 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
     private List<PublicActivitiesEntity.DataBean.ReturnDataBean> mPublicActivitiesList;
     private HomePublicActivitiesAdapter mHomePublicActivitiesAdapter;
     private HomeHealthGovernmentAdapter mHomeHealthGovernmentAdapter;
-    private List<HealthGovernmentEntity> mHealthGovernmentDateList;
+    private List<HealthGovernmentEntity.DataBean.ReturnDataBean> mHealthGovernmentDateList;
     private List<AdBannerInfo.DataBean> mHotServiceDate;
+    private int mHealthGovernmentRequestPages, mHealthGovernmentRequestIndex;
+    private Handler mHandler;
+    private final int REFRESH = 0xffffffff;
+    private final long REFRESH_TIME = 5000;
 
     @Override
     protected int initViewResId() {
@@ -125,7 +131,11 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
     @Override
     protected void initView() {
+        mHealthGovernmentRequestPages = 1;
+        mHealthGovernmentRequestIndex = 20;
         initHomeRecyclerView();
+        mHandler = new Handler(this);
+        mHotServiceDate = new ArrayList<>();
     }
 
 
@@ -136,18 +146,69 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         ivHomeSetMeal3.setOnClickListener(v -> jumpWebActivity(HomeItemClickListener.hot3));
         tvHomeRecommendationFamousDoctorMore.setOnClickListener(v -> jumpWebActivity(8));
         tvHomeRecommendationFamousNurseMore.setOnClickListener(v -> jumpWebActivity(9));
+        homeItemFirst2.setOnClickListener(v -> homeContractClick());
+
+        homeSmartRefreshLayout.setOnRefreshListener(v -> {
+            homeSmartRefreshLayout.setEnableRefresh(true);
+            mHandler.sendEmptyMessageDelayed(REFRESH, REFRESH_TIME);
+            mHealthGovernmentRequestPages = 1;
+            tvContentFlag.setVisibility(View.GONE);
+            initData();
+        });
+
+        homeSmartRefreshLayout.setOnLoadMoreListener(v -> {
+            homeSmartRefreshLayout.setEnableLoadMore(true);
+            mHealthGovernmentRequestPages++;
+            ObtainHealthGovernment();
+        });
+    }
+
+    private void homeContractClick() {
+        EventBus.getDefault().postSticky("clickContractEvent");
     }
 
     @Override
     protected void initData() {
+
         obtainAdvertiseDate();
         obtainHotServiceDate();
         obtainPublicActivitiesDate();
         obtainRecommendationFamousDoctorDate();
         obtainRecommendationFamousNurseDate();
-        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_APN_SETTINGS,Manifest.permission.READ_EXTERNAL_STORAGE},1);
-        UpdateManage manager = new UpdateManage(getContext(),"http://www.yihuan100.com/app/zhiyoukong/zhiyoukong.apk");
-        manager.showDownloadDialog();
+        ObtainHealthGovernment();
+    }
+
+    private void ObtainHealthGovernment() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("OrgId", "1");
+        params.put("CategoryId", "1");
+        params.put("PageIndex", mHealthGovernmentRequestPages + "");
+        params.put("PageSize", mHealthGovernmentRequestIndex + "");
+
+        mMyOkhttp.post().url(HttpUrl.GetHealthInformationList).params(params).tag(this).enqueue(new GsonResponseHandler<HealthGovernmentEntity>() {
+            @Override
+            public void onSuccess(int statusCode, HealthGovernmentEntity response) {
+                if (response.getCode() == 0) {
+                    if (homeSmartRefreshLayout.isRefreshing()) {
+                        mHealthGovernmentDateList.clear();
+                    }
+                    mHealthGovernmentDateList.addAll(response.getData().getReturnData());
+                    if (mHealthGovernmentDateList.size() < mHealthGovernmentRequestIndex) {
+                        homeSmartRefreshLayout.setEnableLoadMore(false);
+                        tvContentFlag.setVisibility(View.VISIBLE);
+                    }
+                    mHomeHealthGovernmentAdapter.notifyDataSetChanged();
+                } else {
+                    toast(response.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailures(int statusCode, String errorMsg) {
+                CommonMethod.requestError(statusCode, errorMsg);
+                homeSmartRefreshLayout.finishLoadMore();
+            }
+        });
     }
 
     private void obtainPublicActivitiesDate() {
@@ -191,13 +252,17 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
             @Override
             public void onFailures(int statusCode, String errorMsg) {
+                CommonMethod.requestError(statusCode, errorMsg);
             }
         });
     }
 
     private void handHotServiceData(List<AdBannerInfo.DataBean> data) {
         if (data != null && data.size() == 3) {
-            mHotServiceDate = data;
+            if (homeSmartRefreshLayout.isRefreshing()) {
+                mHotServiceDate.clear();
+            }
+            mHotServiceDate.addAll(data);
             for (int i = 0; i < 3; i++) {
                 if (i == 0)
                     Glide.with(getActivity()).load(data.get(i).getContent()).into(ivHomeSetMeal1);
@@ -229,6 +294,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
             @Override
             public void onFailures(int statusCode, String errorMsg) {
+                CommonMethod.requestError(statusCode, errorMsg);
             }
         });
     }
@@ -256,12 +322,11 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
     }
 
     private void obtainRecommendationFamousNurseDate() {
-        String path = HttpUrl.QueryDoctorInfoForHot + "?HosGroupId=" + 0 + "&OrgId=" + 0 + "&DrType=" + 1;
+        String path = HttpUrl.QueryDoctorInfoForHot + "?HosGroupId=" + 0 + "&OrgId=" + 0 + "&DrType=" + 2;
         mMyOkhttp.get().url(path).tag(this).enqueue(new GsonResponseHandler<FamousDoctorOrNurseEntity>() {
             @Override
             public void onSuccess(int statusCode, FamousDoctorOrNurseEntity entituy) {
-                if (homeSmartRefreshLayout.isRefreshing())
-                    homeSmartRefreshLayout.setEnableRefresh(false);
+
                 List<FamousDoctorOrNurseEntity.DataBean> data = entituy.getData();
                 if (data == null || data.size() == 0) {
                     // mDoctorContainer.setVisibility(View.GONE);
@@ -278,9 +343,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
             @Override
             public void onFailures(int statusCode, String errorMsg) {
-                if (homeSmartRefreshLayout.isRefreshing()) {
-                    homeSmartRefreshLayout.setEnableRefresh(false);
-                }
+
                 CommonMethod.requestError(statusCode, errorMsg);
             }
         });
@@ -291,8 +354,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         mMyOkhttp.get().url(path).tag(this).enqueue(new GsonResponseHandler<FamousDoctorOrNurseEntity>() {
             @Override
             public void onSuccess(int statusCode, FamousDoctorOrNurseEntity entituy) {
-                if (homeSmartRefreshLayout.isRefreshing())
-                    homeSmartRefreshLayout.setEnableRefresh(false);
+
                 List<FamousDoctorOrNurseEntity.DataBean> data = entituy.getData();
                 if (data == null || data.size() == 0) {
                     // mDoctorContainer.setVisibility(View.GONE);
@@ -309,9 +371,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
             @Override
             public void onFailures(int statusCode, String errorMsg) {
-                if (homeSmartRefreshLayout.isRefreshing()) {
-                    homeSmartRefreshLayout.setEnableRefresh(false);
-                }
+
                 CommonMethod.requestError(statusCode, errorMsg);
             }
         });
@@ -360,8 +420,21 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
                 FamousDoctorOrNurseEntity.DataBean bean = (FamousDoctorOrNurseEntity.DataBean) obj;
                 jumpWebActivity(bean);
                 break;
+            case HomeItemClickListener.healGovernment:
+                HealthGovernmentEntity.DataBean.ReturnDataBean healthGovernment = (HealthGovernmentEntity.DataBean.ReturnDataBean) obj;
+                toast("健康咨询");
+                break;
 
         }
+    }
+
+    @Override
+    public boolean handleMessage(Message msg) {
+        if (msg.what == REFRESH) {
+            homeSmartRefreshLayout.finishRefresh();
+
+        }
+        return false;
     }
 
     private static class SingletonHolder {
@@ -403,14 +476,10 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
 
         mHealthGovernmentDateList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            HealthGovernmentEntity entity = new HealthGovernmentEntity();
-            mHealthGovernmentDateList.add(entity);
-        }
         LinearLayoutManager healthGovernment = new LinearLayoutManager(getContext());
         healthGovernment.setOrientation(LinearLayoutManager.VERTICAL);
         homeHealthGovernmentRecyclerView.setLayoutManager(healthGovernment);
-        mHomeHealthGovernmentAdapter = new HomeHealthGovernmentAdapter(mHealthGovernmentDateList);
+        mHomeHealthGovernmentAdapter = new HomeHealthGovernmentAdapter(mHealthGovernmentDateList, this);
         homeHealthGovernmentRecyclerView.setAdapter(mHomeHealthGovernmentAdapter);
 
     }

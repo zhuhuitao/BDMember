@@ -71,6 +71,10 @@ public class HttpUrl {
     public static String SavePatientVisit = PatientAccount + "/SavePatientVisit";
     //公益活动
     public static String PublicWelfareActivity = PlatFormAPI + "/PublicWelfareActivity";
+    //健康政务
+    public static String HealthInformation = PlatFormAPI + "/HealthInformation";
+    //签约服务
+    public static String ServicePackItem = PlatFormAPI + "/ServicePackItem";
 
     //首页
     public static String QueryDoctorInfoForHot = Doctor + "/QueryDoctorInfoForHot";
@@ -98,14 +102,15 @@ public class HttpUrl {
     // get hot city
     public static String QueryHostArea = Area + "QueryHostArea";
 
+    //获取公益活动列表
+    public static String GetPublicWelfareActivitys = PublicWelfareActivity + "/GetPublicWelfareActivitys";
+    //获取健康政务列表
+    public static String GetHealthInformationList = HealthInformation + "/GetHealthInformationList";
+    //获取签约服务列表
+    public static String QueryServicePackPageAndDetail = ServicePackItem + "/QueryServicePackPageAndDetail";
+
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
     public static String DefaultPatient = PatientAccount + "/QueryDefaultPatientByAccountId";
-
-    public static String GetPublicWelfareActivitys = PublicWelfareActivity+"/GetPublicWelfareActivitys";
-
-
-    public static String localHost = "http://172.18.30.4";//？测试环境
-
 
 }

@@ -91,4 +91,13 @@
     <string name="download">下载</string>
     <string name="calc">计算中...</string>
     <string name="sdError">sd卡错误</string>
+    <string name="titleError">标题错误</string>
+    <string name="timeErrror">时间错误</string>
+    <string name="lookOtherContent">看看其它类容吧</string>
+    <string name="baseServicePackageName">儿童保健</string>
+    <string name="byeNum">115人已购买</string>
+    <string name="price">￥650.00</string>
+    <string name="specialPackage">专项服务包</string>
+    <string name="basePackage">基础服务包</string>
+    <string name="alreadyBuy">人已购买</string>
 </resources>

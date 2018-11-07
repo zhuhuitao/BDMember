@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ll_activity"
     android:orientation="vertical">
 
@@ -6,7 +7,13 @@
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/home_smart_refresh_layout"
-        style="@style/match_match_vertical">
+        style="@style/match_match_vertical"
+        app:srlAccentColor="@color/theme"
+        app:srlPrimaryColor="@color/theme">
+
+        <com.scwang.smartrefresh.header.PhoenixHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <android.support.v4.widget.NestedScrollView style="@style/match_match">
 
@@ -38,6 +45,12 @@
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
+
+        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 

@@ -18,6 +18,10 @@ import com.newdjk.bdmember.ui.fragment.OnlineFragment;
 import com.newdjk.bdmember.widget.BottomTabRadioButton;
 import com.newdjk.bdmember.widget.FragmentController;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +59,8 @@ public class MainActivity extends BasicActivity {
 //        if (AndroidWorkaround.checkDeviceHasNavigationBar(this)) {
 //            AndroidWorkaround.assistActivity(findViewById(android.R.id.content));
 //        }
+
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -65,6 +71,7 @@ public class MainActivity extends BasicActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -199,5 +206,18 @@ public class MainActivity extends BasicActivity {
     @Override
     public void addWindowManger(BasicActivity activity) {
         super.addWindowManger(activity);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onHandleContractEvent(String flag){
+        if (flag.equals("clickContractEvent")){
+            fgtController.showFragment(2);
+            rbTab1.setChecked(false);
+            rbTab2.setChecked(false);
+            rbTab3.setChecked(true);
+            rbTab4.setChecked(false);
+            rbTab5.setChecked(false);
+        }
     }
 }

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/ll_activity">
+
+    <include layout="@layout/layout_titlebar" />
+
+    <android.support.v4.widget.NestedScrollView style="@style/match_match">
+
+        <LinearLayout style="@style/match_match_vertical">
+
+            <com.youth.banner.Banner
+                android:id="@+id/contract_banner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_175"
+                android:background="@mipmap/ic_group2" />
+
+            <include layout="@layout/layout_contract_first_item" />
+
+            <include layout="@layout/layout_contract_second_item" />
+
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
 
 </LinearLayout>

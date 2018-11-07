@@ -96,7 +96,6 @@ public class HomePublicActivitiesAdapter extends RecyclerView.Adapter<HomePublic
         TextView tvActivitiesTime;
         @BindView(R.id.tv_activities_sing_up_num)
         TextView tvActivitiesSingUpNum;
-        private Context mContext;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
