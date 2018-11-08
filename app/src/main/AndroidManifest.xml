@@ -3,8 +3,8 @@
     package="com.newdjk.bdmember">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -94,8 +94,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyAppThem" />
 
+        <activity
+            android:name=".ui.activity.contract.ServicePackageDetail"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppThem" />
 
-        -
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.xqd.struggle.member.fileprovider"

@@ -26,13 +26,12 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/contract_base_service_package_rv"
-        android:layout_below="@id/contract_base_service_package"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_1"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10"
-        android:background="@android:color/white" />
+        android:layout_below="@id/contract_base_service_package"
+        android:background="@android:color/white"
+
+        android:padding="@dimen/dp_10" />
 
 
 </RelativeLayout>

@@ -30,6 +30,7 @@ import com.newdjk.bdmember.alipay.PayResult;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.AliPayInfo;
 import com.newdjk.bdmember.utils.Contants;
+import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.SpUtils;
 import com.newdjk.bdmember.widget.LoadDialog;
 import com.newdjk.bdmember.wxapi.WXPayEntryActivity;
@@ -45,7 +46,7 @@ public class OnlineFragment extends BasicFragment {
     @BindView(R.id.mWebView)
     BridgeWebView mWebView;
     Unbinder unbinder;
-    private String mUrl = "http://172.18.30.139/#/doctor-list?hide=1?";
+    private String mUrl = HttpUrl.LOCAL_HOST_IP+"doctor-list?hide=1?";
     private CallBackFunction mfunction;
     private static final int SDK_PAY_FLAG = 1;
 

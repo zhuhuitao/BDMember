@@ -82,4 +82,7 @@ public class Contants {
      */
     public static String LOGIN_IDENTIFIER = "login_identifier";
     public static String LoginJson = "LoginJson";
+
+
+    public static int POSITION = 0;
 }

@@ -517,7 +517,8 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
                 intent.putExtra("code", 1103);
                 break;
             case 7:
-
+                intent.putExtra("type",19);
+                intent.putExtra("code",1920);
                 break;
             case 8:
                 intent.putExtra("type", 15);
@@ -533,6 +534,8 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
                 toActivity(mOrderVideoIntent);
                 break;
             case 11:
+                break;
+            case 12:
                 break;
             default:
                 LogUtils.exception("the position is not right value!");

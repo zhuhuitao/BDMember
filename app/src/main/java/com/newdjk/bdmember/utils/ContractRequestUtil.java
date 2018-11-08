@@ -28,7 +28,6 @@ public class ContractRequestUtil {
         MyApplication.getInstance().getmMyOkHttp().post().url(HttpUrl.QueryServicePackPageAndDetail).params(params).tag(this).enqueue(new GsonResponseHandler<ServicePackageEntity>() {
             @Override
             public void onSuccess(int statusCode, ServicePackageEntity response) {
-
                 callback.success(response);
             }
 

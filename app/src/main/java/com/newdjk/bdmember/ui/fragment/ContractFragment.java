@@ -1,5 +1,6 @@
 package com.newdjk.bdmember.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.ServicePackageEntity;
+import com.newdjk.bdmember.ui.activity.contract.ServicePackageDetail;
 import com.newdjk.bdmember.ui.adapter.ContractServicePackageAdapter;
 import com.newdjk.bdmember.utils.BaseCallback;
 import com.newdjk.bdmember.utils.ContractRequestUtil;
@@ -76,13 +78,19 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
 
     @Override
     protected void initListener() {
-        contractBaseServicePackage.setOnClickListener(v -> {
+        contractBaseServicePackage.setOnClickListener(v ->
+                jumpToServicePackageDetail(2)
+        );
 
-        });
+        contractSpecialServicePackage.setOnClickListener(v ->
+                jumpToServicePackageDetail(1)
+        );
+    }
 
-        contractSpecialServicePackage.setOnClickListener(v -> {
-
-        });
+    private void jumpToServicePackageDetail(int type) {
+        Intent intent = new Intent(getContext(), ServicePackageDetail.class);
+        intent.putExtra("type", type);
+        toActivity(intent);
     }
 
     @Override
@@ -98,7 +106,7 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
                 ServicePackageEntity entity = (ServicePackageEntity) o;
                 if (entity == null) return;
                 if (entity.getCode() == 0) {
-                    //mSpecialPackageList.clear();
+                    mSpecialPackageList.clear();
                     if (entity.getData().getReturnData() != null) {
                         mSpecialPackageList.addAll(entity.getData().getReturnData());
                         mSpecialPackageAdapter.notifyDataSetChanged();

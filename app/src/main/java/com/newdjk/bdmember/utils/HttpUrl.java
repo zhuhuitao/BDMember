@@ -5,6 +5,8 @@ public class HttpUrl {
     //public static String ip = "http://172.18.30.4";//？测试环境
     public static String ip = "http://api.newstarthealth.cn";//？正式环境
 
+    public static String LOCAL_HOST_IP = "http://172.18.30.140/#/";
+
 
     public static String ConsultWebAPI = ip + "/ConsultWebAPI";// //1、咨询、复诊：
     public static String PlatFormAPI = ip + "/PlatFormAPI";//	平台接口	包含用户、病人、角色权限、服务包以及知识库等各公共模块接口
@@ -17,6 +19,7 @@ public class HttpUrl {
     public static String Doctor = PlatFormAPI + "/Doctor";//		获取IM信息接口
     public static String Banner = ip + "/AdAPI/";//		获取首页的banner数据
     public static String Area = PlatFormAPI + "/Area/";//获取地区
+    public static String HealthHouse = PlatFormAPI + "/HealthHouse";//健康小屋
 
     //========================登陸===========================
     public static String login = SSOAPI + "/Patient/Login";//登录
@@ -108,9 +111,12 @@ public class HttpUrl {
     public static String GetHealthInformationList = HealthInformation + "/GetHealthInformationList";
     //获取签约服务列表
     public static String QueryServicePackPageAndDetail = ServicePackItem + "/QueryServicePackPageAndDetail";
+    //根据查询条件获取健康小屋列表
+    public static String GetHealthHouses = HealthHouse + "/GetHealthHouses";
 
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
     public static String DefaultPatient = PatientAccount + "/QueryDefaultPatientByAccountId";
+
 
 }

@@ -61,7 +61,7 @@ public class WebViewActivity extends BasicActivity {
     private static final String TAG = "WebViewActivity";
     @BindView(R.id.mWebView)
     BridgeWebView mWebView;
-    private String mUrl = "http://172.18.30.139/#/";
+    private String mUrl = "http://172.18.30.140/#/";
     private int type;
     private int id;
     private int code;
@@ -81,27 +81,27 @@ public class WebViewActivity extends BasicActivity {
         mGson = new Gson();
         Intent intent = getIntent();
         if (intent != null) {
-            type = intent.getIntExtra("type",0);
-            id = intent.getIntExtra("id",0);
-            code = intent.getIntExtra("code",0);
+            type = intent.getIntExtra("type", 0);
+            id = intent.getIntExtra("id", 0);
+            code = intent.getIntExtra("code", 0);
             switch (type) {
                 case 1:
-                    mUrl = mUrl+"img-order";
+                    mUrl = mUrl + "img-order";
                     break;
                 case 2:
-                    mUrl = mUrl+"video-order";
+                    mUrl = mUrl + "video-order";
                     break;
                 case 3:
-                    mUrl = mUrl+"continuation-order";
+                    mUrl = mUrl + "continuation-order";
                     break;
                 case 4:
-                    mUrl = mUrl+"pre-order";
+                    mUrl = mUrl + "pre-order";
                     break;
                 case 5:
-                    mUrl = mUrl+"service-order";
+                    mUrl = mUrl + "service-order";
                     break;
                 case 6:
-                    mUrl = mUrl+"my-doctor";
+                    mUrl = mUrl + "my-doctor";
                     break;
                 case 7:
                     mUrl = mUrl + "Patient-list";
@@ -125,18 +125,18 @@ public class WebViewActivity extends BasicActivity {
                     mUrl = mUrl + "case";
                     break;
                 case 14:
-                    mUrl = mUrl + "doctor-index?id="+id;
+                    mUrl = mUrl + "doctor-index?id=" + id;
                     break;
                 case 15:
                     if (code != 0) {
-                        mUrl = mUrl + "doctor-list?code="+code;
+                        mUrl = mUrl + "doctor-list?code=" + code;
                     } else {
                         mUrl = mUrl + "doctor-list";
                     }
                     break;
                 case 16:
                     if (code != 0) {
-                        mUrl = mUrl + "nurse-list?code="+code;
+                        mUrl = mUrl + "nurse-list?code=" + code;
                     } else {
                         mUrl = mUrl + "nurse-list";
                     }
@@ -146,6 +146,11 @@ public class WebViewActivity extends BasicActivity {
                     break;
                 case 18:
                     mUrl = mUrl + "nurse-list?servicePackage=1";
+                    break;
+                case 19:
+                    mUrl = mUrl + "information";
+                case 20:
+                    mUrl = mUrl + "healthRoom/cabinDetails?id=" + id + "&userId=" + code;
                     break;
             }
 
@@ -246,11 +251,11 @@ public class WebViewActivity extends BasicActivity {
         mWebView.registerHandler("ImInfo", new BridgeHandler() {
             @Override
             public void handler(String data, CallBackFunction function) {
-                Log.d("ImInfo===",data);
+                Log.d("ImInfo===", data);
 
                 Intent intent = new Intent(WebViewActivity.this, ChatActivity.class);
                 ImDoctorEntity imDoctorEntity = mGson.fromJson(data, ImDoctorEntity.class);
-                intent.putExtra("ImInfo",imDoctorEntity);
+                intent.putExtra("ImInfo", imDoctorEntity);
                 startActivity(intent);
             }
         });
@@ -328,8 +333,6 @@ public class WebViewActivity extends BasicActivity {
     }
 
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -382,7 +385,7 @@ public class WebViewActivity extends BasicActivity {
             }
         }.execute(path);
     }
-    
+
 
     @Override
     protected void initListener() {
@@ -415,6 +418,7 @@ public class WebViewActivity extends BasicActivity {
 
     /**
      * 微信支付
+     *
      * @paramdata
      */
     private void weixinPay(String data) {
@@ -422,7 +426,7 @@ public class WebViewActivity extends BasicActivity {
         IWXAPI api = WXAPIFactory.createWXAPI(this, MainConstant.WEIXIN_APP_ID);
         // 将该app注册到微信
         api.registerApp(MainConstant.WEIXIN_APP_ID);
-        Log.d(TAG,"data=" + data);
+        Log.d(TAG, "data=" + data);
         try {
             JSONObject json = new JSONObject(data);
             PayReq req = new PayReq();
@@ -440,6 +444,6 @@ public class WebViewActivity extends BasicActivity {
             e.printStackTrace();
         }
     }
-    
-    
+
+
 }

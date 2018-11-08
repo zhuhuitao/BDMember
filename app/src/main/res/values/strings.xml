@@ -100,4 +100,13 @@
     <string name="specialPackage">专项服务包</string>
     <string name="basePackage">基础服务包</string>
     <string name="alreadyBuy">人已购买</string>
+    <string name="hub_title_them">健康小屋主题</string>
+    <string name="activity">活动</string>
+    <string name="activities_over">已结束</string>
+    <string name="activities_playing">进行中</string>
+    <string name="selectArea">选择区/县</string>
+    <string name="healthHubThem">健康小屋</string>
+    <string name="baseServicePackage">基础服务包</string>
+    <string name="buyThem">1000人已购买</string>
+    <string name="servicePeople">服务人群：儿童</string>
 </resources>
