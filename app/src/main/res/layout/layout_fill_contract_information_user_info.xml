@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/height_content_width_parent"
+    android:layout_marginTop="@dimen/dp_1"
+    android:background="@color/white"
+    android:padding="@dimen/dp_10">
+
+    <com.newdjk.bdmember.widget.CircleImageView
+        android:id="@+id/iv_user_header"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:layout_centerVertical="true" />
+
+    <LinearLayout
+        style="@style/wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_toRightOf="@id/iv_user_header"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/wrap_content"
+            android:text="@string/contractDoctor"
+            android:textColor="@color/deep_gray_text"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_contract_name"
+            style="@style/wrap_content"
+            android:layout_marginTop="@dimen/dp_3"
+            android:text="@string/contractName"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_contact_id_card"
+            style="@style/wrap_content"
+            android:layout_marginTop="@dimen/dp_3"
+            android:text="@string/contractName"
+            android:textColor="@color/deep_gray_text"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_contract_tel"
+            style="@style/wrap_content"
+            android:layout_marginTop="@dimen/dp_3"
+            android:text="@string/contractName"
+            android:textColor="@color/deep_gray_text"
+            android:textSize="@dimen/sp_12" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_change_other"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_30"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/ic_orange_box"
+        android:gravity="center"
+        android:text="@string/change"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/sp_12" />
+
+</RelativeLayout>

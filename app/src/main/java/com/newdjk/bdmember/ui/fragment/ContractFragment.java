@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.ServicePackageEntity;
+import com.newdjk.bdmember.ui.activity.contract.FamilyMedicalTeam;
 import com.newdjk.bdmember.ui.activity.contract.ServicePackageDetail;
+import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.ContractServicePackageAdapter;
 import com.newdjk.bdmember.utils.BaseCallback;
 import com.newdjk.bdmember.utils.ContractRequestUtil;
@@ -79,7 +81,8 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
     @Override
     protected void initListener() {
         contractBaseServicePackage.setOnClickListener(v ->
-                jumpToServicePackageDetail(2)
+              //  jumpToServicePackageDetail(2)
+                toActivity(new Intent(getContext(),FamilyMedicalTeam.class))
         );
 
         contractSpecialServicePackage.setOnClickListener(v ->
@@ -175,7 +178,12 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
 
     @Override
     public void homeItemListener(int type, Object obj) {
-
+        ServicePackageEntity.DataBean.ReturnDataBean bean = (ServicePackageEntity.DataBean.ReturnDataBean) obj;
+        Intent intent = new Intent(getContext(), WebViewActivity.class);
+        intent.putExtra("type", 21);
+        intent.putExtra("code", 1202);
+        intent.putExtra("id", bean.getServicePackId());
+        toActivity(intent);
     }
 
     private static class SingletonHolder {

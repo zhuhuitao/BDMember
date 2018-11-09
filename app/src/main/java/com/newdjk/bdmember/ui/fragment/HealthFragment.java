@@ -20,7 +20,9 @@ import com.newdjk.bdmember.bean.AreaEntity;
 import com.newdjk.bdmember.bean.HealthHutEntity;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.HealthHutAdapter;
+import com.newdjk.bdmember.utils.BaseCallback;
 import com.newdjk.bdmember.utils.Contants;
+import com.newdjk.bdmember.utils.ContractRequestUtil;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.PopItemClickListener;
 import com.newdjk.bdmember.utils.RecyclerViewItemClickListener;
@@ -131,10 +133,11 @@ public class HealthFragment extends BasicFragment implements PopItemClickListene
     }
 
     private void getAreaData() {
-        String url = HttpUrl.QueryAreaByParentId + "?ParentId=42";
-        mMyOkhttp.get().url(url).tag(this).enqueue(new GsonResponseHandler<AreaEntity>() {
+
+        ContractRequestUtil.getInstance().getAreaData(new BaseCallback() {
             @Override
-            public void onSuccess(int statusCode, AreaEntity response) {
+            public void success(Object o) {
+                AreaEntity response = (AreaEntity) o;
                 if (response.getCode() != 0) {
                     toast(response.getMessage());
                     return;
@@ -145,12 +148,11 @@ public class HealthFragment extends BasicFragment implements PopItemClickListene
                     mWindow = new HealthHubWindow(getContext(), mAreaList);
                     mWindow.setItemClickListener(HealthFragment.this);
                 }
-
             }
 
             @Override
-            public void onFailures(int statusCode, String errorMsg) {
-                CommonMethod.requestError(statusCode, errorMsg);
+            public void failed(int errorCode, String errorMsg) {
+                CommonMethod.requestError(errorCode, errorMsg);
             }
         });
     }

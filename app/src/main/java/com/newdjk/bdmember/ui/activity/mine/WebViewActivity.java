@@ -152,6 +152,9 @@ public class WebViewActivity extends BasicActivity {
                 case 20:
                     mUrl = mUrl + "healthRoom/cabinDetails?id=" + id + "&userId=" + code;
                     break;
+                case 21:
+                    mUrl = mUrl + "signingPackage/details?ServicePackId=" + id;
+                    break;
             }
 
         }

@@ -108,5 +108,18 @@
     <string name="healthHubThem">健康小屋</string>
     <string name="baseServicePackage">基础服务包</string>
     <string name="buyThem">1000人已购买</string>
-    <string name="servicePeople">服务人群：儿童</string>
+    <string name="servicePeople">服务人群：</string>
+    <string name="districtCounty">区/县</string>
+    <string name="seeDetail">查看详情</string>
+    <string name="teamLeader">团队长：</string>
+    <string name="selectFamilyMedicalTeam">选择家医团队</string>
+    <string name="contractDoctor">签约就诊人</string>
+    <string name="contractName">就诊人</string>
+    <string name="change">切换</string>
+    <string name="homeTownAddress">居住地址</string>
+    <string name="doctorInfo">赵笑曰 全科医生</string>
+    <string name="contract_family_team">签约家医团队</string>
+    <string name="contractServicePackage">签约服务包</string>
+    <string name="confirmSubmit">确认提交</string>
+    <string name="confirmContractTips">实名制签约，请确保信息真实有效</string>
 </resources>

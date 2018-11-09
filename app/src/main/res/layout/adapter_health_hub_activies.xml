@@ -50,7 +50,7 @@
         android:id="@+id/tv_hub_status"
         style="@style/wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@mipmap/ic_health_hub_activity"
+        android:background="@mipmap/ic_orange_box"
         android:gravity="center"
         android:text="@string/activity"
         android:textColor="@color/orange"

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_activity">
+
+    <include layout="@layout/layout_titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/dp_1">
+
+        <TextView
+            android:id="@+id/tv_area_select"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_45"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:gravity="center"
+            android:text="@string/districtCounty"
+            android:textColor="@color/deep_gray_text"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_down"
+            style="@style/wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_30"
+            android:drawableRight="@mipmap/ic_gray_down"
+            android:drawablePadding="@dimen/dp_5"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="@string/districtCounty"
+            android:textColor="@color/deep_gray_text"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <include layout="@layout/layout_refresh_rv" />
+
+
+</LinearLayout>

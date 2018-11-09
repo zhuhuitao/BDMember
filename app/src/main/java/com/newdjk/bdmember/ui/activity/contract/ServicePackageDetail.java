@@ -1,5 +1,6 @@
 package com.newdjk.bdmember.ui.activity.contract;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,18 +14,20 @@ import android.widget.TextView;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
 import com.newdjk.bdmember.bean.ServicePackageEntity;
+import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.ServicePackageAdapter;
 import com.newdjk.bdmember.utils.BaseCallback;
 import com.newdjk.bdmember.utils.ContractRequestUtil;
+import com.newdjk.bdmember.utils.RecyclerViewItemClickListener;
+import com.newdjk.bdmember.widget.CommonMethod;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class ServicePackageDetail extends BasicActivity {
+public class ServicePackageDetail extends BasicActivity implements RecyclerViewItemClickListener {
     @BindView(R.id.top_left)
     ImageView topLeft;
     @BindView(R.id.tv_left)
@@ -56,8 +59,9 @@ public class ServicePackageDetail extends BasicActivity {
     @Override
     protected void initView() {
         topTitle.setText(getString(R.string.baseServicePackage));
-        topTitle.setTextColor(Color.WHITE);
-
+        topTitle.setTextColor(getResources().getColor(R.color.deep_gray_text));
+        liearTitlebar.setBackgroundColor(Color.WHITE);
+        topLeft.setVisibility(View.VISIBLE);
         mType = getIntent().getIntExtra("type", -1);
         mPage = 1;
         mIndex = 20;
@@ -71,17 +75,24 @@ public class ServicePackageDetail extends BasicActivity {
         rvHealth.setLayoutManager(manager);
 
         mList = new ArrayList<>();
-        mList.add(new ServicePackageEntity.DataBean.ReturnDataBean());
-        mList.add(new ServicePackageEntity.DataBean.ReturnDataBean());
-        mList.add(new ServicePackageEntity.DataBean.ReturnDataBean());
-        mList.add(new ServicePackageEntity.DataBean.ReturnDataBean());
-        mAdapter = new ServicePackageAdapter(mList,this);
+        mAdapter = new ServicePackageAdapter(mList, this, this);
         rvHealth.setAdapter(mAdapter);
     }
 
     @Override
     protected void initListener() {
+        healthRefreshLayout.setOnRefreshListener(v -> {
+            mPage = 1;
+            healthRefreshLayout.setEnableLoadMore(true);
+            getServicePackageData();
+        });
 
+        healthRefreshLayout.setOnLoadMoreListener(v -> {
+            mPage++;
+            getServicePackageData();
+        });
+
+        topLeft.setOnClickListener(v -> this.finish());
     }
 
     @Override
@@ -94,12 +105,24 @@ public class ServicePackageDetail extends BasicActivity {
         ContractRequestUtil.getInstance().doHttpRequest(mPage, mIndex, mType + "", new BaseCallback() {
             @Override
             public void success(Object o) {
-
+                ServicePackageEntity entity = (ServicePackageEntity) o;
+                if (healthRefreshLayout.isRefreshing()) {
+                    mList.clear();
+                    healthRefreshLayout.finishRefresh();
+                }
+                if (healthRefreshLayout.isEnableLoadMore()) {
+                    healthRefreshLayout.finishLoadMore();
+                }
+                mList.addAll(entity.getData().getReturnData());
+                mAdapter.notifyDataSetChanged();
+                if (mList.size() < mIndex) {
+                    healthRefreshLayout.setEnableLoadMore(false);
+                }
             }
 
             @Override
             public void failed(int errorCode, String errorMsg) {
-
+                CommonMethod.requestError(errorCode, errorMsg);
             }
         });
     }
@@ -109,4 +132,13 @@ public class ServicePackageDetail extends BasicActivity {
 
     }
 
+    @Override
+    public void recyclerViewClickListener(int position, Object o) {
+        Intent intent = new Intent(this, WebViewActivity.class);
+        intent.putExtra("type", 21);
+        intent.putExtra("code", 1202);
+        ServicePackageEntity.DataBean.ReturnDataBean bean = (ServicePackageEntity.DataBean.ReturnDataBean) o;
+        intent.putExtra("id", bean.getServicePackId());
+        toActivity(intent);
+    }
 }

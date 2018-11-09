@@ -20,6 +20,7 @@ public class HttpUrl {
     public static String Banner = ip + "/AdAPI/";//		获取首页的banner数据
     public static String Area = PlatFormAPI + "/Area/";//获取地区
     public static String HealthHouse = PlatFormAPI + "/HealthHouse";//健康小屋
+    public static String FamilyDoctorTeam = PlatFormAPI + "/FamilyDoctorTeam";//家医团队
 
     //========================登陸===========================
     public static String login = SSOAPI + "/Patient/Login";//登录
@@ -113,7 +114,8 @@ public class HttpUrl {
     public static String QueryServicePackPageAndDetail = ServicePackItem + "/QueryServicePackPageAndDetail";
     //根据查询条件获取健康小屋列表
     public static String GetHealthHouses = HealthHouse + "/GetHealthHouses";
-
+    //根据查询条件获取家庭医生团队列表
+    public static String GetFamilyDoctorTeams = FamilyDoctorTeam + "/GetFamilyDoctorTeams";
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
     public static String DefaultPatient = PatientAccount + "/QueryDefaultPatientByAccountId";
