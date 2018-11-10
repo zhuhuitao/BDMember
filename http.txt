@@ -1,0 +1,3 @@
+http://api.newstarthealth.cn/PlatFormAPI/Help/
+http://172.18.30.4/adapi/help
+http://172.18.30.4/FetalHeartAPI/help
