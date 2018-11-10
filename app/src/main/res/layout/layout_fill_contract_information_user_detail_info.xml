@@ -24,7 +24,7 @@
         android:drawablePadding="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
-        android:text="@string/homeTownAddress"
+        android:text="@string/pleaseSelect"
         android:textColor="@color/shallow_gray_text" />
 
     <View
@@ -39,11 +39,11 @@
         android:id="@+id/tv_social_security"
         style="@style/wrap_content"
         android:layout_below="@id/line"
-        android:drawableLeft="@mipmap/ic_contact_town_address"
+        android:drawableLeft="@mipmap/ic_contract_social_security"
         android:drawablePadding="@dimen/dp_10"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
-        android:text="@string/homeTownAddress"
+        android:text="@string/socialSecurity"
         android:textColor="@color/shallow_gray_text" />
 
     <TextView
@@ -55,7 +55,7 @@
         android:drawablePadding="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
-        android:text="@string/homeTownAddress"
+        android:text="@string/pleaseSelect"
         android:textColor="@color/shallow_gray_text" />
 
 

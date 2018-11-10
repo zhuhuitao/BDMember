@@ -17,6 +17,7 @@ import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.ServicePackageEntity;
 import com.newdjk.bdmember.ui.activity.contract.FamilyMedicalTeam;
+import com.newdjk.bdmember.ui.activity.contract.FillContactInformation;
 import com.newdjk.bdmember.ui.activity.contract.ServicePackageDetail;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.ContractServicePackageAdapter;

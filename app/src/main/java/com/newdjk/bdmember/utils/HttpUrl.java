@@ -1,5 +1,7 @@
 package com.newdjk.bdmember.utils;
 
+import com.newdjk.bdmember.ui.activity.contract.FamilyMedicalTeam;
+
 public class HttpUrl {
     //18702072346   adp
     //public static String ip = "http://172.18.30.4";//？测试环境
@@ -116,9 +118,11 @@ public class HttpUrl {
     public static String GetHealthHouses = HealthHouse + "/GetHealthHouses";
     //根据查询条件获取家庭医生团队列表
     public static String GetFamilyDoctorTeams = FamilyDoctorTeam + "/GetFamilyDoctorTeams";
+    //获取家庭医生团队详情
+    public static String GetFamilyDoctorTeamDetail = FamilyDoctorTeam + "/GetFamilyDoctorTeamDetail";
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
-    public static String DefaultPatient = PatientAccount + "/QueryDefaultPatientByAccountId";
+    public static String QueryPatientVisitByAccountId = PatientAccount + "/QueryPatientVisitByAccountId";
 
 
 }

@@ -155,6 +155,8 @@ public class WebViewActivity extends BasicActivity {
                 case 21:
                     mUrl = mUrl + "signingPackage/details?ServicePackId=" + id;
                     break;
+                case 22:
+                    mUrl = mUrl +"signingPackage/groupDetails?drTeamId="+id;
             }
 
         }

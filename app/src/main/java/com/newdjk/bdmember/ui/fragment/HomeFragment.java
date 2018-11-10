@@ -161,6 +161,8 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
             mHealthGovernmentRequestPages++;
             ObtainHealthGovernment();
         });
+
+
     }
 
     private void homeContractClick() {

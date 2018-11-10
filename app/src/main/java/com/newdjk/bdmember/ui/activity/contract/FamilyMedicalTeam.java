@@ -1,5 +1,6 @@
 package com.newdjk.bdmember.ui.activity.contract;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
 import com.newdjk.bdmember.bean.AreaEntity;
 import com.newdjk.bdmember.bean.FamilyMedicalTeamEntity;
+import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.FamilyMedicalTeamAdapter;
 import com.newdjk.bdmember.utils.BaseCallback;
 import com.newdjk.bdmember.utils.ContractRequestUtil;
@@ -216,13 +218,20 @@ public class FamilyMedicalTeam extends BasicActivity implements PopItemClickList
 
     @Override
     public void recyclerViewChildrenClickListener(Object o) {
-        if (o != null){
-
+        if (o != null) {
+            Intent intent = new Intent(this, WebViewActivity.class);
+            intent.putExtra("type", 22);
+            intent.putExtra("code", 1202);
+            intent.putExtra("id", ((FamilyMedicalTeamEntity.DataBean.ReturnDataBean) o).getDrId());
+            toActivity(intent);
         }
     }
 
     @Override
     public void recyclerViewItemClickListener(Object o) {
-
+        int drId = ((FamilyMedicalTeamEntity.DataBean.ReturnDataBean) o).getDrId();
+        Intent intent = new Intent(this, FillContactInformation.class);
+        intent.putExtra("id", drId);
+        toActivity(intent);
     }
 }

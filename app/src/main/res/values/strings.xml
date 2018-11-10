@@ -122,4 +122,31 @@
     <string name="contractServicePackage">签约服务包</string>
     <string name="confirmSubmit">确认提交</string>
     <string name="confirmContractTips">实名制签约，请确保信息真实有效</string>
+    <string name="notKnow">未知</string>
+    <string name="pleaseSelect">请选择</string>
+    <string name="socialSecurity">社保信息</string>
+    <string name="fillContractInfo">填写签约信息</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="menu_settings">Settings</string>
+
+    <string name="scan_text">将二维码置于框内扫描</string>
+
+    <string name="language_text">当前解码语言：</string>
 </resources>
