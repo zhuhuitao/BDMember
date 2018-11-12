@@ -149,4 +149,11 @@
     <string name="scan_text">将二维码置于框内扫描</string>
 
     <string name="language_text">当前解码语言：</string>
+    <string name="selectPaint">请选择就诊人</string>
+    <string name="socialSecurityConfirm">有无社保</string>
+    <string name="socialSecurityNum">社保账号</string>
+    <string name="pleaseFillSocialSecurityNum">请输入社保账号</string>
+    <string name="socialSecurityInfo">社保信息</string>
+    <string name="noPermissionTips">用户没有允许需要的权限，使用可能会受到限制！</string>
+    <string name="submitSuccess">提交成功</string>
 </resources>

@@ -28,6 +28,7 @@ import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.MainConstant;
 import com.newdjk.bdmember.utils.MessageEvent;
 import com.newdjk.bdmember.utils.SpUtils;
+import com.newdjk.bdmember.widget.CircleImageView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,7 +44,7 @@ import butterknife.Unbinder;
  */
 public class MinFragment extends BasicFragment {
     @BindView(R.id.civImg)
-    RoundedImageView civImg;
+    CircleImageView civImg;
     @BindView(R.id.tvName)
     TextView tvName;
 

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_activity">
+
+    <include layout="@layout/layout_titlebar" />
+
+    <RelativeLayout
+        style="@style/height_content_width_parent"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@android:color/white"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            style="@style/wrap_content"
+            android:text="@string/contractName"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_paint_name"
+            style="@style/wrap_content"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        style="@style/height_content_width_parent"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@android:color/white"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            style="@style/wrap_content"
+            android:text="@string/socialSecurityConfirm"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <Switch
+            android:id="@+id/sw_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/height_content_width_parent"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@android:color/white"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_social_security_num"
+            style="@style/wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/socialSecurityNum"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <EditText
+            android:id="@+id/et_social_security_num"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toRightOf="@id/tv_social_security_num"
+            android:background="@null"
+            android:hint="@string/pleaseFillSocialSecurityNum"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/shallow_gray_text"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/height_content_width_parent"
+        android:layout_marginTop="@dimen/dp_1"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_social_security_card"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_150"
+            android:scaleType="fitXY"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:gravity="center">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/bt_confirm_submit"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:layout_marginLeft="@dimen/dp_45"
+            android:layout_marginRight="@dimen/dp_45"
+            android:background="@drawable/button_them_bg"
+            android:text="@string/confirmSubmit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
+
+
+</LinearLayout>

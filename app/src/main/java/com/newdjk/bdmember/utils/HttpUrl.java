@@ -120,6 +120,11 @@ public class HttpUrl {
     public static String GetFamilyDoctorTeams = FamilyDoctorTeam + "/GetFamilyDoctorTeams";
     //获取家庭医生团队详情
     public static String GetFamilyDoctorTeamDetail = FamilyDoctorTeam + "/GetFamilyDoctorTeamDetail";
+    //上传证件照
+    public static String QueryDoctorRegImagByDrId = Doctor + "/QueryDoctorRegImagByDrId";
+    //    POST Doctor/DoctorImagUpload  医生证照\签名\头像上传
+    public static String DoctorImagUpload = Doctor + "/DoctorImagUpload";
+    public static String DoctorImagSave = Doctor + "/DoctorImagSave";
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
     public static String QueryPatientVisitByAccountId = PatientAccount + "/QueryPatientVisitByAccountId";

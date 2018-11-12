@@ -18,15 +18,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lxq.okhttp.response.GsonResponseHandler;
+import com.newdjk.bdmember.MainActivity;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.AdBannerInfo;
 import com.newdjk.bdmember.bean.FamousDoctorOrNurseEntity;
 import com.newdjk.bdmember.bean.HealthGovernmentEntity;
 import com.newdjk.bdmember.bean.PublicActivitiesEntity;
+import com.newdjk.bdmember.ui.activity.ScanActivity;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.HomeHealthGovernmentAdapter;
 import com.newdjk.bdmember.ui.adapter.HomePregnantMotherServicePackageAdapter;
@@ -40,6 +43,8 @@ import com.newdjk.bdmember.utils.ItemOnClickCall;
 import com.newdjk.bdmember.utils.LogUtils;
 import com.newdjk.bdmember.widget.CommonMethod;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -123,6 +128,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
     private Handler mHandler;
     private final int REFRESH = 0xffffffff;
     private final long REFRESH_TIME = 5000;
+    private final int REQUEST_CODE = 01;
 
     @Override
     protected int initViewResId() {
@@ -161,6 +167,13 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
             mHealthGovernmentRequestPages++;
             ObtainHealthGovernment();
         });
+
+        topRight.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), ScanActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
+        });
+
+        homeItemFirst1.setOnClickListener(v->jumpWebActivity(0));
 
 
     }
@@ -497,6 +510,8 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
         switch (position) {
             case 0:
+                intent.putExtra("type",24);
+                intent.putExtra("code","1024");
                 break;
             case 1:
                 break;
@@ -593,4 +608,23 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    toast("解析结果:" + result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    toast("解析结果:" + "失败");
+                }
+            }
+        }
+    }
 }

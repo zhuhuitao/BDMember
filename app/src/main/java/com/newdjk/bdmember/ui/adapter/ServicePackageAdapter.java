@@ -19,6 +19,7 @@ public class ServicePackageAdapter extends BaseQuickAdapter<ServicePackageEntity
     private Context mContext;
     private RecyclerViewItemClickListener mListener;
 
+
     public ServicePackageAdapter(@Nullable List<ServicePackageEntity.DataBean.ReturnDataBean> data, Context mContext, RecyclerViewItemClickListener mListener) {
         super(R.layout.adapter_service_package, data);
         this.mContext = mContext;

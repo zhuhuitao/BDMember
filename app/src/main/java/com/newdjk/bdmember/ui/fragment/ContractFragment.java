@@ -82,8 +82,7 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
     @Override
     protected void initListener() {
         contractBaseServicePackage.setOnClickListener(v ->
-              //  jumpToServicePackageDetail(2)
-                toActivity(new Intent(getContext(),FamilyMedicalTeam.class))
+                jumpToServicePackageDetail(2)
         );
 
         contractSpecialServicePackage.setOnClickListener(v ->

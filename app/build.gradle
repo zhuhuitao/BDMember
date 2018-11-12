@@ -36,7 +36,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "116ab374582a1f778d71a113",
+                JPUSH_APPKEY : " 59c9ed656e18ccece96537ec",
                 JPUSH_CHANNEL: "developer-default",
         ]
 
@@ -106,9 +106,11 @@ dependencies {
     implementation rootProject.ext.dependencies["SmartRefreshLayout"]
     implementation rootProject.ext.dependencies["SmartRefreshHeader"]
     implementation rootProject.ext.dependencies["baserecycleradapter"]
+    implementation rootProject.ext.dependencies["scan"]
     //腾讯bugly日志
     implementation rootProject.ext.dependencies["crashreport"]
     implementation rootProject.ext.dependencies["crashreport-native"]
     implementation project(':okhttp')
     implementation files('libs/alipaySdk-20180601.jar')
+
 }

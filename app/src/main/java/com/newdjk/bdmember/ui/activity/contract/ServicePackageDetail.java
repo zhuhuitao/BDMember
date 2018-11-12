@@ -58,7 +58,13 @@ public class ServicePackageDetail extends BasicActivity implements RecyclerViewI
 
     @Override
     protected void initView() {
-        topTitle.setText(getString(R.string.baseServicePackage));
+        mType = getIntent().getIntExtra("type",-1);
+        if (mType == 1) {
+            topTitle.setText(getString(R.string.specialPackage));
+        } else if (mType == 2) {
+            topTitle.setText(getString(R.string.baseServicePackage));
+        }
+
         topTitle.setTextColor(getResources().getColor(R.color.deep_gray_text));
         liearTitlebar.setBackgroundColor(Color.WHITE);
         topLeft.setVisibility(View.VISIBLE);

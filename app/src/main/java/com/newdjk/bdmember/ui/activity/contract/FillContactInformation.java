@@ -20,7 +20,10 @@ import com.newdjk.bdmember.utils.GlidUtil;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.SpUtils;
 import com.newdjk.bdmember.widget.CircleImageView;
-import com.newdjk.bdmember.wxapi.WXEntryActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -81,6 +84,8 @@ public class FillContactInformation extends BasicActivity {
     private List<PaintListEntity.DataBean> mPaintList;
     private int mDrId;
     private FamilyMedicalDetailInfo.DataBean mFamilyMedicalDetailInfo;
+    private PaintListEntity.DataBean mPaintInfo;
+    private String mSicialSecurityNumber;
 
     @Override
     protected int initViewResId() {
@@ -89,6 +94,7 @@ public class FillContactInformation extends BasicActivity {
 
     @Override
     protected void initView() {
+        EventBus.getDefault().register(this);
         mDrId = getIntent().getIntExtra("id", -1);
         topTitle.setText(getString(R.string.fillContractInfo));
         liearTitlebar.setBackgroundColor(Color.WHITE);
@@ -98,10 +104,26 @@ public class FillContactInformation extends BasicActivity {
     @Override
     protected void initListener() {
         topLeft.setOnClickListener(v -> this.finish());
-        tvChangeOther.setOnClickListener(v->{
-            Intent intent = new Intent(this,WebViewActivity.class);
-            //intent.putExtra("type",)
+        tvChangeOther.setOnClickListener(v -> {
+            Intent intent = new Intent(this, WebViewActivity.class);
+            intent.putExtra("type", 23);
+            intent.putExtra("id", 0);
+            intent.putExtra("code", 0);
+            toActivity(intent);
         });
+
+        tvSocialSecuritySelect.setOnClickListener(v -> {
+            if (mPaintInfo == null) {
+                toast(getString(R.string.selectPaint));
+                return;
+            }
+            Intent intent = new Intent(this, FillSocialSecurityInformation.class);
+            intent.putExtra("socialSecurity", mPaintInfo);
+            toActivity(intent);
+        });
+
+        tvContractServicePackageSelect.setOnClickListener(v -> this.finish());
+
     }
 
     @Override
@@ -176,16 +198,18 @@ public class FillContactInformation extends BasicActivity {
             showEmptyPaintInfo();
             return;
         }
-
+        mPaintInfo = mPaintList.get(0);
         showFirstPaintInfo();
     }
 
     private void showFirstPaintInfo() {
-        PaintListEntity.DataBean info = mPaintList.get(0);
-        tvContractName.setText(info.getPatientName() == null ? getString(R.string.notKnow) : info.getPatientName());
-        tvContactIdCard.setText(info.getCredNo() == null ? getString(R.string.notKnow) : info.getCredNo());
-        tvContractTel.setText(info.getMobile() == null ? getString(R.string.notKnow) : info.getMobile());
-        GlidUtil.loadImage(this, info.getPicturePath(), ivUserHeader);
+        if (mPaintInfo == null) {
+            return;
+        }
+        tvContractName.setText(mPaintInfo.getPatientName() == null ? getString(R.string.notKnow) : mPaintInfo.getPatientName());
+        tvContactIdCard.setText(mPaintInfo.getCredNo() == null ? getString(R.string.notKnow) : mPaintInfo.getCredNo());
+        tvContractTel.setText(mPaintInfo.getMobile() == null ? getString(R.string.notKnow) : mPaintInfo.getMobile());
+        GlidUtil.loadImage(this, mPaintInfo.getPicturePath(), ivUserHeader);
     }
 
 
@@ -200,4 +224,22 @@ public class FillContactInformation extends BasicActivity {
 
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void receviePaintSelectInfo(PaintListEntity.DataBean info) {
+        if (info != null) {
+            mPaintInfo = info;
+            showFirstPaintInfo();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void recevieCardNumber(String no) {
+        mSicialSecurityNumber = no;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

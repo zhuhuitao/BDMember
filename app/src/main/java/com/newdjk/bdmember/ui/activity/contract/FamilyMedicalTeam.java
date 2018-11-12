@@ -15,6 +15,7 @@ import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
 import com.newdjk.bdmember.bean.AreaEntity;
 import com.newdjk.bdmember.bean.FamilyMedicalTeamEntity;
+import com.newdjk.bdmember.bean.ServicePackageDetailEntity;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.FamilyMedicalTeamAdapter;
 import com.newdjk.bdmember.utils.BaseCallback;
@@ -62,6 +63,7 @@ public class FamilyMedicalTeam extends BasicActivity implements PopItemClickList
     private List<FamilyMedicalTeamEntity.DataBean.ReturnDataBean> mFamilyMedicalTeamList;
     private FamilyMedicalTeamAdapter mAdapter;
     private boolean mIsSelect;
+    private ServicePackageDetailEntity mServicePackageDetailEntity;
 
     @Override
     protected int initViewResId() {
@@ -70,6 +72,10 @@ public class FamilyMedicalTeam extends BasicActivity implements PopItemClickList
 
     @Override
     protected void initView() {
+        mServicePackageDetailEntity = getIntent().getParcelableExtra("packageDetailEntity");
+        if (mServicePackageDetailEntity != null){
+
+        }
         mIndex = 20;
         mPage = 1;
         mServicePackageId = 63;

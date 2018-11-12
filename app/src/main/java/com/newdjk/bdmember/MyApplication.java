@@ -13,6 +13,7 @@ import com.lxq.okhttp.utils.OkHttpLogUtils;
 import com.newdjk.bdmember.utils.MainConstant;
 import com.newdjk.bdmember.wxapi.WXPayEntryActivity;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.concurrent.TimeUnit;
 
@@ -46,6 +47,7 @@ public class MyApplication extends Application {
         application = this;
         context = this;
         mainTid = android.os.Process.myTid();
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
     private void initOkHttp() {

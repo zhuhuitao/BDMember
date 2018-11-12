@@ -1,5 +1,8 @@
 package com.newdjk.bdmember.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class PaintListEntity {
@@ -39,7 +42,7 @@ public class PaintListEntity {
         this.Data = Data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Parcelable {
         /**
          * PatientId : 48
          * AccountId : 30
@@ -75,6 +78,37 @@ public class PaintListEntity {
         private String CreateTime;
         private String CredTypeName;
         private String Age;
+
+        protected DataBean(Parcel in) {
+            PatientId = in.readInt();
+            AccountId = in.readInt();
+            PatientName = in.readString();
+            NameLetter = in.readString();
+            PatientSex = in.readInt();
+            Birthday = in.readString();
+            CredType = in.readInt();
+            CredNo = in.readString();
+            Mobile = in.readString();
+            PicturePath = in.readString();
+            PatientType = in.readInt();
+            Newborn = in.readInt();
+            DefaultPatient = in.readInt();
+            CreateTime = in.readString();
+            CredTypeName = in.readString();
+            Age = in.readString();
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel in) {
+                return new DataBean(in);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
 
         public int getPatientId() {
             return PatientId;
@@ -202,6 +236,31 @@ public class PaintListEntity {
 
         public void setAge(String Age) {
             this.Age = Age;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(PatientId);
+            dest.writeInt(AccountId);
+            dest.writeString(PatientName);
+            dest.writeString(NameLetter);
+            dest.writeInt(PatientSex);
+            dest.writeString(Birthday);
+            dest.writeInt(CredType);
+            dest.writeString(CredNo);
+            dest.writeString(Mobile);
+            dest.writeString(PicturePath);
+            dest.writeInt(PatientType);
+            dest.writeInt(Newborn);
+            dest.writeInt(DefaultPatient);
+            dest.writeString(CreateTime);
+            dest.writeString(CredTypeName);
+            dest.writeString(Age);
         }
     }
 }

@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,10 +33,15 @@ import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
 import com.newdjk.bdmember.bean.Entity;
 import com.newdjk.bdmember.bean.ImDoctorEntity;
+import com.newdjk.bdmember.bean.PaintListEntity;
+import com.newdjk.bdmember.bean.ServicePackageDetailEntity;
+import com.newdjk.bdmember.bean.ServicePackageEntity;
 import com.newdjk.bdmember.ui.activity.ChatActivity;
+import com.newdjk.bdmember.ui.activity.contract.FamilyMedicalTeam;
 import com.newdjk.bdmember.utils.Contants;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.ImageBase64;
+import com.newdjk.bdmember.utils.LogUtils;
 import com.newdjk.bdmember.utils.MainConstant;
 import com.newdjk.bdmember.utils.SpUtils;
 import com.newdjk.bdmember.widget.CommonMethod;
@@ -44,6 +50,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -82,6 +89,7 @@ public class WebViewActivity extends BasicActivity {
         Intent intent = getIntent();
         if (intent != null) {
             type = intent.getIntExtra("type", 0);
+            LogUtils.e(type + "dedddddd");
             id = intent.getIntExtra("id", 0);
             code = intent.getIntExtra("code", 0);
             switch (type) {
@@ -156,8 +164,17 @@ public class WebViewActivity extends BasicActivity {
                     mUrl = mUrl + "signingPackage/details?ServicePackId=" + id;
                     break;
                 case 22:
-                    mUrl = mUrl +"signingPackage/groupDetails?drTeamId="+id;
+                    mUrl = mUrl + "signingPackage/groupDetails?drTeamId=" + id;
+                    break;
+                case 23:
+                    mUrl = mUrl + "Patient-list?ChooseFor=" + id;
+                    break;
+                case 24:
+                    mUrl = mUrl + "hospital";
+                    break;
             }
+
+            LogUtils.e("========" + type);
 
         }
         // 这里一定要加这个  不然会有缓存
@@ -222,6 +239,29 @@ public class WebViewActivity extends BasicActivity {
                     mWebView.goBack(); //goBack()表示返回WebView的上一页面
                 } else {
                     finish();
+                }
+            }
+        });
+
+        mWebView.registerHandler("servicePackage", new BridgeHandler() {
+            @Override
+            public void handler(String data, CallBackFunction function) {
+                if (TextUtils.isEmpty(data)) return;
+                ServicePackageDetailEntity entity = mGson.fromJson(data, ServicePackageDetailEntity.class);
+                Intent i = new Intent(WebViewActivity.this, FamilyMedicalTeam.class);
+                i.putExtra("packageDetailEntity", entity);
+                toActivity(i);
+                WebViewActivity.this.noAnimFinish();
+            }
+        });
+
+
+        mWebView.registerHandler("choosePatient", new BridgeHandler() {
+            @Override
+            public void handler(String data, CallBackFunction function) {
+                if (data != null) {
+                    PaintListEntity.DataBean info = mGson.fromJson(data, PaintListEntity.DataBean.class);
+                    EventBus.getDefault().postSticky(info);
                 }
             }
         });
