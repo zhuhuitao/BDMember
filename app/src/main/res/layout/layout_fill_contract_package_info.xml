@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/height_content_width_parent"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@color/white"
+    android:paddingTop="@dimen/dp_10">
+
+    <RelativeLayout
+        android:id="@+id/rl_info"
+      style="@style/height_content_width_parent">
+        <com.newdjk.bdmember.widget.CircleImageView
+            android:id="@+id/iv_doctor_header"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10" />
+
+        <TextView
+            android:id="@+id/tv_doctor_info"
+            style="@style/wrap_content"
+            android:layout_toRightOf="@id/iv_doctor_header"
+            android:text="@string/doctorInfo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_contract_team_name"
+            style="@style/wrap_content"
+            android:layout_below="@id/tv_doctor_info"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_toRightOf="@id/iv_doctor_header"
+            android:text="@string/doctorInfo"
+            android:textColor="@color/shallow_gray_text"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_team_type"
+            style="@style/wrap_content"
+            android:layout_below="@id/tv_contract_team_name"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_toRightOf="@id/iv_doctor_header"
+            android:text="@string/doctorInfo"
+            android:textColor="@color/shallow_gray_text"
+            android:textSize="@dimen/sp_12" />
+
+
+        <TextView
+            style="@style/wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/contract_family_team"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/rl_info"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/activity_bg" />
+
+
+    <TextView
+        style="@style/wrap_content"
+        android:layout_below="@id/line"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:drawableLeft="@mipmap/ic_contract_service_package"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="@string/contractServicePackage"
+        android:textColor="@color/shallow_gray_text"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:id="@+id/tv_contract_service_package_select"
+        style="@style/wrap_content"
+        android:layout_below="@id/line"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:drawableRight="@mipmap/ic_more"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="@string/contractServicePackage"
+        android:textColor="@color/shallow_gray_text"
+        android:textSize="@dimen/sp_14" />
+
+
+</RelativeLayout>

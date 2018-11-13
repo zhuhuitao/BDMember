@@ -2,7 +2,11 @@ package com.newdjk.bdmember.utils;
 
 import com.lxq.okhttp.response.GsonResponseHandler;
 import com.newdjk.bdmember.MyApplication;
+import com.newdjk.bdmember.bean.AreaEntity;
 import com.newdjk.bdmember.bean.ServicePackageEntity;
+import com.newdjk.bdmember.ui.fragment.HealthFragment;
+import com.newdjk.bdmember.widget.CommonMethod;
+import com.newdjk.bdmember.widget.HealthHubWindow;
 
 import java.util.HashMap;
 
@@ -36,6 +40,21 @@ public class ContractRequestUtil {
                 callback.failed(statusCode, errorMsg);
             }
         });
+    }
 
+
+    public void getAreaData(BaseCallback callback) {
+        String url = HttpUrl.QueryAreaByParentId + "?ParentId=42";
+        MyApplication.getInstance().getmMyOkHttp().get().url(url).tag(this).enqueue(new GsonResponseHandler<AreaEntity>() {
+            @Override
+            public void onSuccess(int statusCode, AreaEntity response) {
+                callback.success(response);
+            }
+
+            @Override
+            public void onFailures(int statusCode, String errorMsg) {
+                callback.failed(statusCode, errorMsg);
+            }
+        });
     }
 }

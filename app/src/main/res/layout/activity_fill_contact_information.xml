@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/ll_activity">
+
+    <include layout="@layout/layout_titlebar" />
+
+    <include layout="@layout/layout_fill_contract_information_user_info" />
+
+    <include layout="@layout/layout_fill_contract_information_user_detail_info" />
+
+    <include layout="@layout/layout_fill_contract_package_info" />
+
+    <include layout="@layout/layout_contract_bottom" />
+
+</LinearLayout>

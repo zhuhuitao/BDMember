@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/ff">
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <com.newdjk.bdmember.scan.view.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:inner_width="200dp"
+        app:inner_height="200dp"
+        app:inner_margintop="150dp"
+        app:inner_corner_color="@color/theme"
+        app:inner_corner_length="30dp"
+        app:inner_corner_width="5dp"
+        app:inner_scan_bitmap="@mipmap/ic_camera"
+        app:inner_scan_speed="10"
+        app:inner_scan_iscircle="false"
+        />
+
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_370"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/theme"
+        android:text="@string/scanDes"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_45"
+    android:background="@color/black">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:gravity="bottom"/>
+</LinearLayout>
+
+
+</FrameLayout>
+
+
+
+
+

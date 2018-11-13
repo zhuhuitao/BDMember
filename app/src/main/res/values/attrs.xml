@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="VerifyCode">
-        <attr name="codeTextSize" format="dimension"/>
-        <attr name="codeBackground" format="color"/>
-        <attr name="codeLength" format="integer"/>
-        <attr name="isContainChar" format="boolean"/>
-        <attr name="pointNum" format="integer"/>
-        <attr name="linNum" format="integer"/>
+        <attr name="codeTextSize" format="dimension" />
+        <attr name="codeBackground" format="color" />
+        <attr name="codeLength" format="integer" />
+        <attr name="isContainChar" format="boolean" />
+        <attr name="pointNum" format="integer" />
+        <attr name="linNum" format="integer" />
     </declare-styleable>
     <declare-styleable name="WheelView">
-        <attr name="itemVisibleNum" format="integer"/>
+        <attr name="itemVisibleNum" format="integer" />
 
         <attr name="textColorOuter" format="color" />
         <attr name="textSizeOuter" format="dimension" />
@@ -18,13 +18,13 @@
 
         <attr name="lineColor" format="color" />
 
-        <attr name="isLoop" format="boolean"/>
-        <attr name="lineSpaceingDimens" format="dimension"/>
+        <attr name="isLoop" format="boolean" />
+        <attr name="lineSpaceingDimens" format="dimension" />
 
-        <attr name="wheelGravity" format="enum" >
-            <enum name="left" value="234"/>
-            <enum name="center" value="354"/>
-            <enum name="right" value="894"/>
+        <attr name="wheelGravity" format="enum">
+            <enum name="left" value="234" />
+            <enum name="center" value="354" />
+            <enum name="right" value="894" />
         </attr>
 
     </declare-styleable>
@@ -114,6 +114,33 @@
         <attr name="is_show_anim" format="boolean" />
         <!-- 单行显示数量-->
         <attr name="one_line_show_num" format="integer" />
+
+    </declare-styleable>
+
+    <declare-styleable name="FitWindowLayoutV2">
+        <attr name="status_bar_color" format="color|reference" />
+        <attr name="bar_color_enabled" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ViewfinderView">
+
+        <attr name="inner_width" format="dimension" />
+
+        <attr name="inner_height" format="dimension" />
+
+        <attr name="inner_margintop" format="dimension" />
+
+        <attr name="inner_corner_color" format="color" />
+
+        <attr name="inner_corner_length" format="dimension" />
+
+        <attr name="inner_corner_width" format="dimension" />
+
+        <attr name="inner_scan_bitmap" format="reference" />
+
+        <attr name="inner_scan_speed" format="integer" />
+
+        <attr name="inner_scan_iscircle" format="boolean" />
 
     </declare-styleable>
 </resources>

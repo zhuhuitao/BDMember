@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+   style="@style/height_content_width_parent"
+    android:id="@+id/ll_contract_service_package"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -22,6 +22,8 @@
             android:id="@+id/tv_package_name"
             style="@style/wrap_content"
             android:layout_marginTop="@dimen/dp_3"
+            android:singleLine="true"
+            android:enabled="true"
             android:text="@string/baseServicePackageName" />
 
         <TextView
@@ -33,7 +35,7 @@
         <TextView
             android:id="@+id/tv_price"
             style="@style/wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
             android:text="@string/price"
             android:textColor="@color/orange" />
     </LinearLayout>

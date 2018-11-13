@@ -3,6 +3,7 @@
     style="@style/height_content_width_parent"
     android:layout_marginTop="@dimen/dp_1"
     android:padding="@dimen/dp_10"
+    android:id="@+id/rl_service_package"
     android:background="@android:color/white">
 
     <ImageView
@@ -48,6 +49,7 @@
                 android:id="@+id/tv_has_buy"
                 style="@style/wrap_content"
                 android:text="@string/buyThem"
+                android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/shallow_gray_text"
                 android:textSize="@dimen/sp_10" />
 
@@ -67,6 +69,6 @@
         style="@style/wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
-        android:background="@mipmap/ic_service_package_detail" />
+        android:background="@mipmap/ic_more" />
 
 </RelativeLayout>

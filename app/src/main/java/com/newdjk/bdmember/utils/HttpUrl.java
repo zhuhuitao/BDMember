@@ -1,5 +1,7 @@
 package com.newdjk.bdmember.utils;
 
+import com.newdjk.bdmember.ui.activity.contract.FamilyMedicalTeam;
+
 public class HttpUrl {
     //18702072346   adp
     //public static String ip = "http://172.18.30.4";//？测试环境
@@ -20,13 +22,14 @@ public class HttpUrl {
     public static String Banner = ip + "/AdAPI/";//		获取首页的banner数据
     public static String Area = PlatFormAPI + "/Area/";//获取地区
     public static String HealthHouse = PlatFormAPI + "/HealthHouse";//健康小屋
+    public static String FamilyDoctorTeam = PlatFormAPI + "/FamilyDoctorTeam";//家医团队
 
     //========================登陸===========================
     public static String login = SSOAPI + "/Patient/Login";//登录
     public static String LoginSendMobileCode = PlatFormAPI + "/PatientAccount/SendMobileCode";//登录f发送验证码
     public static String DoctorLogin = SSOAPI + "/Doctor/Login";//登录医生
     public static String loginIm = IMAPI + "/Account/GetIMAccount";//获取IM用户名和签名
-    public static String updatePhoto = PlatFormAPI + "/PatientAccount/PatientImagUpload";//会员上传图片
+    public static String updatePhoto = PlatFormAPI + "/PatientAccount";//会员上传图片
     public static String KnowledgeBase = PlatFormAPI + "/KnowledgeBase";//		知识库(宣教、问卷)
     // ===========================  PatientAccount  ( 患者 )============================================
     public static String PatientArchives = PlatFormAPI + "/PatientArchives";//		健康档案
@@ -113,10 +116,18 @@ public class HttpUrl {
     public static String QueryServicePackPageAndDetail = ServicePackItem + "/QueryServicePackPageAndDetail";
     //根据查询条件获取健康小屋列表
     public static String GetHealthHouses = HealthHouse + "/GetHealthHouses";
-
+    //根据查询条件获取家庭医生团队列表
+    public static String GetFamilyDoctorTeams = FamilyDoctorTeam + "/GetFamilyDoctorTeams";
+    //获取家庭医生团队详情
+    public static String GetFamilyDoctorTeamDetail = FamilyDoctorTeam + "/GetFamilyDoctorTeamDetail";
+    //查询社保信息
+    public static String QueryPatientSocialByPatientId = PatientAccount +"/QueryPatientSocialByPatientId";
+    //获取默认就诊人
+    public static String QueryDefaultPatientByAccountId = PatientAccount +"/QueryDefaultPatientByAccountId";
+    //    POST Doctor/DoctorImagUpload  医生证照\签名\头像上传
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
-    public static String DefaultPatient = PatientAccount + "/QueryDefaultPatientByAccountId";
+    public static String QueryPatientVisitByAccountId = PatientAccount + "/QueryPatientVisitByAccountId";
 
 
 }

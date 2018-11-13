@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/height_content_width_parent"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/dp_10">
+
+
+    <TextView
+        android:id="@+id/tv_hometown_address"
+        style="@style/wrap_content"
+        android:drawableLeft="@mipmap/ic_contact_town_address"
+        android:drawablePadding="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:text="@string/homeTownAddress"
+        android:textColor="@color/shallow_gray_text" />
+
+    <TextView
+        android:id="@+id/tv_address_select"
+        style="@style/wrap_content"
+        android:layout_alignParentRight="true"
+        android:drawableRight="@mipmap/ic_more"
+        android:drawablePadding="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/pleaseSelect"
+        android:textColor="@color/shallow_gray_text" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/tv_hometown_address"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/activity_bg" />
+
+    <TextView
+        android:id="@+id/tv_social_security"
+        style="@style/wrap_content"
+        android:layout_below="@id/line"
+        android:drawableLeft="@mipmap/ic_contract_social_security"
+        android:drawablePadding="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:text="@string/socialSecurity"
+        android:textColor="@color/shallow_gray_text" />
+
+    <TextView
+        android:id="@+id/tv_social_security_select"
+        style="@style/wrap_content"
+        android:layout_below="@id/line"
+        android:layout_alignParentRight="true"
+        android:drawableRight="@mipmap/ic_more"
+        android:drawablePadding="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="@string/pleaseSelect"
+        android:textColor="@color/shallow_gray_text" />
+
+
+</RelativeLayout>

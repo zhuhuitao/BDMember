@@ -45,8 +45,8 @@ ext {
             "bili"               : "com.bilibili:boxing-impl:1.0.4",
             "SmartRefreshLayout" : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1",
             "SmartRefreshHeader" : "com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1",
-            "baserecycleradapter": "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.24"
-
+            "baserecycleradapter": "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.24",
+            "scan"               : "cn.yipianfengye.android:zxing-library:2.2",
 
     ]
 }

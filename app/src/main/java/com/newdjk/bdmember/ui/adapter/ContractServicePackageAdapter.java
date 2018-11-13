@@ -48,6 +48,7 @@ public class ContractServicePackageAdapter extends BaseQuickAdapter<ServicePacka
             spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFA416")), 0, spannableString.length() - 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             helper.setText(R.id.tv_buyer_num, spannableString);
             helper.setText(R.id.tv_price, new StringBuffer("￥").append(item.getPrice()));
+            helper.getView(R.id.ll_contract_service_package).setOnClickListener(v -> mListener.homeItemListener(mType, item));
         }
 
     }

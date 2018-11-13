@@ -18,15 +18,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lxq.okhttp.response.GsonResponseHandler;
+import com.newdjk.bdmember.MainActivity;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicFragment;
 import com.newdjk.bdmember.bean.AdBannerInfo;
 import com.newdjk.bdmember.bean.FamousDoctorOrNurseEntity;
 import com.newdjk.bdmember.bean.HealthGovernmentEntity;
 import com.newdjk.bdmember.bean.PublicActivitiesEntity;
+import com.newdjk.bdmember.scan.activity.CaptureActivity;
+import com.newdjk.bdmember.scan.activity.CodeUtils;
+import com.newdjk.bdmember.ui.activity.ScanActivity;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.HomeHealthGovernmentAdapter;
 import com.newdjk.bdmember.ui.adapter.HomePregnantMotherServicePackageAdapter;
@@ -38,6 +43,7 @@ import com.newdjk.bdmember.utils.HomeItemClickListener;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.ItemOnClickCall;
 import com.newdjk.bdmember.utils.LogUtils;
+import com.newdjk.bdmember.utils.PermissionUtil;
 import com.newdjk.bdmember.widget.CommonMethod;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.youth.banner.Banner;
@@ -123,6 +129,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
     private Handler mHandler;
     private final int REFRESH = 0xffffffff;
     private final long REFRESH_TIME = 5000;
+    private final int REQUEST_CODE = 01;
 
     @Override
     protected int initViewResId() {
@@ -141,13 +148,20 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
     @Override
     protected void initListener() {
+        //人们服务-
         ivHomeSetMeal1.setOnClickListener(v -> jumpWebActivity(HomeItemClickListener.hot1));
+        //热门服务二
         ivHomeSetMeal2.setOnClickListener(v -> jumpWebActivity(HomeItemClickListener.hot2));
+        //热门服务三
         ivHomeSetMeal3.setOnClickListener(v -> jumpWebActivity(HomeItemClickListener.hot3));
+        //名医推荐
         tvHomeRecommendationFamousDoctorMore.setOnClickListener(v -> jumpWebActivity(8));
+        //护士推荐
         tvHomeRecommendationFamousNurseMore.setOnClickListener(v -> jumpWebActivity(9));
-        homeItemFirst2.setOnClickListener(v -> homeContractClick());
 
+        //签约服务
+        homeItemFirst2.setOnClickListener(v -> homeContractClick());
+        //下拉刷新
         homeSmartRefreshLayout.setOnRefreshListener(v -> {
             homeSmartRefreshLayout.setEnableRefresh(true);
             mHandler.sendEmptyMessageDelayed(REFRESH, REFRESH_TIME);
@@ -155,12 +169,24 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
             tvContentFlag.setVisibility(View.GONE);
             initData();
         });
-
+        //上拉加载
         homeSmartRefreshLayout.setOnLoadMoreListener(v -> {
             homeSmartRefreshLayout.setEnableLoadMore(true);
             mHealthGovernmentRequestPages++;
             ObtainHealthGovernment();
         });
+        //调起扫码
+        topRight.setOnClickListener(v -> {
+            if (PermissionUtil.INSTANCE.checkPermissionStorage(getActivity())) {
+                Intent intent = new Intent(getContext(), CaptureActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+
+        });
+        //互联网医院
+        homeItemFirst1.setOnClickListener(v -> jumpWebActivity(13));
+
+
     }
 
     private void homeContractClick() {
@@ -321,6 +347,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         mBanner.start();
     }
 
+    //获取护士列表
     private void obtainRecommendationFamousNurseDate() {
         String path = HttpUrl.QueryDoctorInfoForHot + "?HosGroupId=" + 0 + "&OrgId=" + 0 + "&DrType=" + 2;
         mMyOkhttp.get().url(path).tag(this).enqueue(new GsonResponseHandler<FamousDoctorOrNurseEntity>() {
@@ -349,6 +376,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         });
     }
 
+    //获取医生列表
     private void obtainRecommendationFamousDoctorDate() {
         String path = HttpUrl.QueryDoctorInfoForHot + "?HosGroupId=" + 0 + "&OrgId=" + 0 + "&DrType=" + 1;
         mMyOkhttp.get().url(path).tag(this).enqueue(new GsonResponseHandler<FamousDoctorOrNurseEntity>() {
@@ -405,22 +433,23 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
     }
 
+    //首页事件监听
     @Override
     public void homeItemListener(int type, Object obj) {
 
         switch (type) {
-            case HomeItemClickListener.homePublicActivities:
+            case HomeItemClickListener.homePublicActivities://公益活动
                 //LogUtils.e(type+"  "+obj.toString());
                 toast(type + obj.toString());
                 break;
-            case HomeItemClickListener.homeNavigateSecond:
+            case HomeItemClickListener.homeNavigateSecond://
                 jumpWebActivity(obj == null ? -1 : Integer.parseInt(obj.toString()));
                 break;
-            case HomeItemClickListener.homeFamousDoctor:
+            case HomeItemClickListener.homeFamousDoctor://名医点击
                 FamousDoctorOrNurseEntity.DataBean bean = (FamousDoctorOrNurseEntity.DataBean) obj;
                 jumpWebActivity(bean);
                 break;
-            case HomeItemClickListener.healGovernment:
+            case HomeItemClickListener.healGovernment://健康资讯
                 HealthGovernmentEntity.DataBean.ReturnDataBean healthGovernment = (HealthGovernmentEntity.DataBean.ReturnDataBean) obj;
                 toast("健康咨询");
                 break;
@@ -494,21 +523,25 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         Intent intent = new Intent(getContext(), WebViewActivity.class);
 
         switch (position) {
-            case 0:
+            case 0://视频问诊
+                intent.putExtra("type", 15);;
+                intent.putExtra("code", 1102);
                 break;
-            case 1:
-                break;
-            case 2:
+            case 1://图文问诊
                 intent.putExtra("type", 15);
                 intent.putExtra("code", 1101);
                 break;
-            case 3:
-                intent.putExtra("type", 15);
-                intent.putExtra("code", 1101);
-                break;
-            case 4:
+            case 2://护理咨询
                 intent.putExtra("type", 16);
                 intent.putExtra("code", 1201);
+                break;
+            case 3://康复指导
+//                intent.putExtra("type", 15);
+//                intent.putExtra("code", 1101);
+                break;
+            case 4://在线续方
+                intent.putExtra("type", 15);
+                intent.putExtra("code", 1103);
                 break;
             case 5:
                 break;
@@ -517,8 +550,8 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
                 intent.putExtra("code", 1103);
                 break;
             case 7:
-                intent.putExtra("type",19);
-                intent.putExtra("code",1920);
+                intent.putExtra("type", 19);
+                intent.putExtra("code", 1920);
                 break;
             case 8:
                 intent.putExtra("type", 15);
@@ -536,6 +569,10 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
             case 11:
                 break;
             case 12:
+                break;
+            case 13://互联网医院
+                intent.putExtra("type", 24);
+                intent.putExtra("code", "1024");
                 break;
             default:
                 LogUtils.exception("the position is not right value!");
@@ -591,4 +628,23 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    toast("解析结果:" + result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    toast("解析结果:" + "失败");
+                }
+            }
+        }
+    }
 }

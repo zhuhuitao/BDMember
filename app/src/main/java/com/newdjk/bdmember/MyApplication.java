@@ -2,6 +2,7 @@ package com.newdjk.bdmember;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.lxq.okhttp.MyOkHttp;
 import com.lxq.okhttp.demo.DownloadMgr;
@@ -10,6 +11,7 @@ import com.lxq.okhttp.persistentcookiejar.PersistentCookieJar;
 import com.lxq.okhttp.persistentcookiejar.cache.SetCookieCache;
 import com.lxq.okhttp.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.lxq.okhttp.utils.OkHttpLogUtils;
+import com.newdjk.bdmember.scan.activity.ZXingLibrary;
 import com.newdjk.bdmember.utils.MainConstant;
 import com.newdjk.bdmember.wxapi.WXPayEntryActivity;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -46,6 +48,7 @@ public class MyApplication extends Application {
         application = this;
         context = this;
         mainTid = android.os.Process.myTid();
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
     private void initOkHttp() {
@@ -78,6 +81,12 @@ public class MyApplication extends Application {
      */
     private void registToWX() {
         mWxApi = WXPayEntryActivity.initWeiXin(this, MainConstant.WEIXIN_APP_ID);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private void initJpush() {

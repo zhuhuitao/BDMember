@@ -108,5 +108,57 @@
     <string name="healthHubThem">健康小屋</string>
     <string name="baseServicePackage">基础服务包</string>
     <string name="buyThem">1000人已购买</string>
-    <string name="servicePeople">服务人群：儿童</string>
+    <string name="servicePeople">服务人群：</string>
+    <string name="districtCounty">区/县</string>
+    <string name="seeDetail">查看详情</string>
+    <string name="teamLeader">团队长：</string>
+    <string name="selectFamilyMedicalTeam">选择家医团队</string>
+    <string name="contractDoctor">签约就诊人</string>
+    <string name="contractName">就诊人</string>
+    <string name="change">切换</string>
+    <string name="homeTownAddress">居住地址</string>
+    <string name="doctorInfo">赵笑曰 全科医生</string>
+    <string name="contract_family_team">签约家医团队</string>
+    <string name="contractServicePackage">签约服务包</string>
+    <string name="confirmSubmit">确认提交</string>
+    <string name="confirmContractTips">实名制签约，请确保信息真实有效</string>
+    <string name="notKnow">未知</string>
+    <string name="pleaseSelect">请选择</string>
+    <string name="socialSecurity">社保信息</string>
+    <string name="fillContractInfo">填写签约信息</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="menu_settings">Settings</string>
+
+    <string name="scan_text">将二维码置于框内扫描</string>
+
+    <string name="language_text">当前解码语言：</string>
+    <string name="selectPaint">请选择就诊人</string>
+    <string name="socialSecurityConfirm">有无社保</string>
+    <string name="socialSecurityNum">社保账号</string>
+    <string name="pleaseFillSocialSecurityNum">请输入社保账号</string>
+    <string name="socialSecurityInfo">社保信息</string>
+    <string name="noPermissionTips">用户没有允许需要的权限，使用可能会受到限制！</string>
+    <string name="submitSuccess">提交成功</string>
+    <string name="scanDes">将二维码放入框内即可自动扫描</string>
+    <string name="scan">扫一扫</string>
+    <string name="openLight">开启照明</string>
+    <string name="pleaseSelectAddress">请选择收货地址</string>
+    <string name="pleaseSelectPaint">请选择就诊人</string>
 </resources>

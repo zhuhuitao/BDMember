@@ -85,4 +85,5 @@ public class Contants {
 
 
     public static int POSITION = 0;
+    public static int TYPE = -1;
 }

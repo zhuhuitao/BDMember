@@ -28,6 +28,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/contract_special_service_package_rv"
         style="@style/height_content_width_parent"
+        android:layout_marginTop="@dimen/dp_1"
         android:layout_below="@id/contract_special_service_package"
         android:background="@android:color/white"
         android:padding="@dimen/dp_10" />
