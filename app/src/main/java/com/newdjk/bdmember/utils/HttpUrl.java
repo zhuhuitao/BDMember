@@ -29,7 +29,7 @@ public class HttpUrl {
     public static String LoginSendMobileCode = PlatFormAPI + "/PatientAccount/SendMobileCode";//登录f发送验证码
     public static String DoctorLogin = SSOAPI + "/Doctor/Login";//登录医生
     public static String loginIm = IMAPI + "/Account/GetIMAccount";//获取IM用户名和签名
-    public static String updatePhoto = PlatFormAPI + "/PatientAccount/PatientImagUpload";//会员上传图片
+    public static String updatePhoto = PlatFormAPI + "/PatientAccount";//会员上传图片
     public static String KnowledgeBase = PlatFormAPI + "/KnowledgeBase";//		知识库(宣教、问卷)
     // ===========================  PatientAccount  ( 患者 )============================================
     public static String PatientArchives = PlatFormAPI + "/PatientArchives";//		健康档案
@@ -120,11 +120,11 @@ public class HttpUrl {
     public static String GetFamilyDoctorTeams = FamilyDoctorTeam + "/GetFamilyDoctorTeams";
     //获取家庭医生团队详情
     public static String GetFamilyDoctorTeamDetail = FamilyDoctorTeam + "/GetFamilyDoctorTeamDetail";
-    //上传证件照
-    public static String QueryDoctorRegImagByDrId = Doctor + "/QueryDoctorRegImagByDrId";
+    //查询社保信息
+    public static String QueryPatientSocialByPatientId = PatientAccount +"/QueryPatientSocialByPatientId";
+    //获取默认就诊人
+    public static String QueryDefaultPatientByAccountId = PatientAccount +"/QueryDefaultPatientByAccountId";
     //    POST Doctor/DoctorImagUpload  医生证照\签名\头像上传
-    public static String DoctorImagUpload = Doctor + "/DoctorImagUpload";
-    public static String DoctorImagSave = Doctor + "/DoctorImagSave";
     /**************************************胎心功能****************************************/
     //获取默认就诊人(根据账号Id)
     public static String QueryPatientVisitByAccountId = PatientAccount + "/QueryPatientVisitByAccountId";

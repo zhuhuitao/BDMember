@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -349,6 +350,7 @@ public abstract class BasicActivity<T> extends FragmentActivity implements View.
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         synchronized (mActivities) {
             if (mActivities.contains(this))
                 mActivities.remove(this);
@@ -411,4 +413,9 @@ public abstract class BasicActivity<T> extends FragmentActivity implements View.
         }
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+    }
 }

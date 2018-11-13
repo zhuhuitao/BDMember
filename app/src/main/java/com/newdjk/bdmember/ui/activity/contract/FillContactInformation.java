@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.lxq.okhttp.response.GsonResponseHandler;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
+import com.newdjk.bdmember.bean.AddressEntity;
 import com.newdjk.bdmember.bean.FamilyMedicalDetailInfo;
 import com.newdjk.bdmember.bean.PaintListEntity;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
@@ -86,6 +87,8 @@ public class FillContactInformation extends BasicActivity {
     private FamilyMedicalDetailInfo.DataBean mFamilyMedicalDetailInfo;
     private PaintListEntity.DataBean mPaintInfo;
     private String mSicialSecurityNumber;
+    private List<AddressEntity.DataBean> mAddressList;
+    private AddressEntity.DataBean mAddressInfo;
 
     @Override
     protected int initViewResId() {
@@ -121,8 +124,31 @@ public class FillContactInformation extends BasicActivity {
             intent.putExtra("socialSecurity", mPaintInfo);
             toActivity(intent);
         });
-
+        tvAddressSelect.setOnClickListener(v -> {
+            Intent intent = new Intent(this, WebViewActivity.class);
+            intent.putExtra("type", 25);
+            intent.putExtra("code", 1);
+            intent.putExtra("id", 0);
+            toActivity(intent);
+        });
         tvContractServicePackageSelect.setOnClickListener(v -> this.finish());
+
+        btConfirmSubmit.setOnClickListener(v -> submitContractInfo());
+
+    }
+
+
+    private void submitContractInfo() {
+        if (mAddressInfo == null) {
+            toast(getString(R.string.pleaseSelectAddress));
+            return;
+        }
+
+        if (mPaintInfo == null) {
+            toast(getString(R.string.pleaseSelectPaint));
+            return;
+        }
+
 
     }
 
@@ -130,6 +156,48 @@ public class FillContactInformation extends BasicActivity {
     protected void initData() {
         obtainPaintList();
         obtainFamilyMedicalTeamDetail();
+        obtainDefaultPaint();
+    }
+
+    private void obtainDefaultPaint() {
+        String url = HttpUrl.QueryDefaultPatientByAccountId +"?AccountId="+SpUtils.getString(Contants.Id);
+        mMyOkhttp.get().url(url).tag(this).enqueue(new GsonResponseHandler<PaintListEntity>() {
+            @Override
+            public void onSuccess(int statusCode, PaintListEntity response) {
+                if (response.getCode() == 0){
+
+                }
+            }
+
+            @Override
+            public void onFailures(int statusCode, String errorMsg) {
+
+            }
+        });
+    }
+
+    private void obtainNormalAddress() {
+        String url = HttpUrl.QueryAddressByPatientId + "?PatientId=" + mPaintInfo.getPatientId();
+        mMyOkhttp.get().url(url).tag(this).enqueue(new GsonResponseHandler<AddressEntity>() {
+            @Override
+            public void onSuccess(int statusCode, AddressEntity response) {
+                if (response.getCode() == 0) {
+                    mAddressList = response.getData();
+                    if (mAddressList != null) {
+                        for (AddressEntity.DataBean a : mAddressList) {
+                            if (a.getIsDefault() == 1) {
+                                mAddressInfo = a;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailures(int statusCode, String errorMsg) {
+
+            }
+        });
     }
 
     private void obtainFamilyMedicalTeamDetail() {
@@ -200,6 +268,7 @@ public class FillContactInformation extends BasicActivity {
         }
         mPaintInfo = mPaintList.get(0);
         showFirstPaintInfo();
+        obtainNormalAddress();
     }
 
     private void showFirstPaintInfo() {
@@ -236,6 +305,14 @@ public class FillContactInformation extends BasicActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void recevieCardNumber(String no) {
         mSicialSecurityNumber = no;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void recevieAddress(AddressEntity.DataBean address) {
+        if (address != null) {
+            mAddressInfo = address;
+        }
+
     }
 
     @Override

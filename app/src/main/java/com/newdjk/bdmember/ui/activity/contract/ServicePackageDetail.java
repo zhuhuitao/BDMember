@@ -17,6 +17,7 @@ import com.newdjk.bdmember.bean.ServicePackageEntity;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.ServicePackageAdapter;
 import com.newdjk.bdmember.utils.BaseCallback;
+import com.newdjk.bdmember.utils.Contants;
 import com.newdjk.bdmember.utils.ContractRequestUtil;
 import com.newdjk.bdmember.utils.RecyclerViewItemClickListener;
 import com.newdjk.bdmember.widget.CommonMethod;
@@ -58,12 +59,14 @@ public class ServicePackageDetail extends BasicActivity implements RecyclerViewI
 
     @Override
     protected void initView() {
-        mType = getIntent().getIntExtra("type",-1);
+        mType = getIntent().getIntExtra("type", -1);
         if (mType == 1) {
             topTitle.setText(getString(R.string.specialPackage));
         } else if (mType == 2) {
             topTitle.setText(getString(R.string.baseServicePackage));
         }
+
+        Contants.TYPE = mType;
 
         topTitle.setTextColor(getResources().getColor(R.color.deep_gray_text));
         liearTitlebar.setBackgroundColor(Color.WHITE);

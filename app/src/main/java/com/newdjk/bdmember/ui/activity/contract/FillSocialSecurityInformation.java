@@ -27,15 +27,15 @@ import com.newdjk.bdmember.basic.BasicActivity;
 import com.newdjk.bdmember.bean.DocQualificationEntity;
 import com.newdjk.bdmember.bean.Entity;
 import com.newdjk.bdmember.bean.PaintListEntity;
+import com.newdjk.bdmember.bean.PatientRegImgImgsInfo;
+import com.newdjk.bdmember.bean.PatientRegImgListInfo;
 import com.newdjk.bdmember.bean.PicturePathEntity;
 import com.newdjk.bdmember.bean.ResponseEntity;
 import com.newdjk.bdmember.bean.SocialSecurityInfo;
 import com.newdjk.bdmember.utils.BaseCallback;
-import com.newdjk.bdmember.utils.Contants;
 import com.newdjk.bdmember.utils.GlidUtil;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.PermissionUtil;
-import com.newdjk.bdmember.utils.SpUtils;
 import com.newdjk.bdmember.utils.UploadPictureUitl;
 import com.newdjk.bdmember.widget.CommonMethod;
 import com.newdjk.bdmember.widget.LoadDialog;
@@ -45,10 +45,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import butterknife.BindView;
 
 import static com.newdjk.bdmember.utils.PermissionUtil.INSTANCE;
@@ -82,7 +79,7 @@ public class FillSocialSecurityInformation extends BasicActivity implements Sele
     AppCompatButton btConfirmSubmit;
     private PaintListEntity.DataBean mPaintInfo;
     private List<DocQualificationEntity.DataBean> mList;
-    private SocialSecurityInfo mSocialSecurityInfo;
+    private SocialSecurityInfo.DataBean mSocialSecurityInfo;
     private SelectedPictureDialog mSelectedPictureDialog;
     private String mPicturePath;
     private final int mCameraRequestCode = 01;
@@ -113,8 +110,9 @@ public class FillSocialSecurityInformation extends BasicActivity implements Sele
         tvPaintName.setText(mPaintInfo.getPatientName() == null ? "" : mPaintInfo.getPatientName());
 
         if (mSocialSecurityInfo == null) return;
-        etSocialSecurityNum.setText(mSocialSecurityInfo.getIdNumber() == null ? "" : mSocialSecurityInfo.getIdNumber());
-        GlidUtil.loadImage(this, mSocialSecurityInfo.getImagePath(), ivSocialSecurityCard);
+        etSocialSecurityNum.setText(mSocialSecurityInfo.getSocialNum() == null ? "" : mSocialSecurityInfo.getSocialNum());
+        GlidUtil.loadImage(this, mSocialSecurityInfo.getImgPath(), ivSocialSecurityCard);
+        mSavePath = mSocialSecurityInfo.getImgPath();
     }
 
     @Override
@@ -122,6 +120,12 @@ public class FillSocialSecurityInformation extends BasicActivity implements Sele
         ivSocialSecurityCard.setOnClickListener(v -> upLoadImage());
 
         btConfirmSubmit.setOnClickListener(v -> submitSocialSecurityInfo());
+
+        btConfirmSubmit.setOnClickListener(v->submitInfo());
+    }
+
+    private void submitInfo() {
+
     }
 
     private void submitSocialSecurityInfo() {
@@ -130,24 +134,26 @@ public class FillSocialSecurityInformation extends BasicActivity implements Sele
             toast(getString(R.string.pleaseFillSocialSecurityNum));
             return;
         }
-       /* DoctorRegImgEntity imageEntity = new DoctorRegImgEntity();
-        imageEntity.setImgPath(mSavePath);
-        imageEntity.setImgType(3);
-        imageEntity.setNumber(mSocialSecurityNumber);
-        ImagSaveRequestEntity doctorImagSaveRequestEntity = new ImagSaveRequestEntity();
-        doctorImagSaveRequestEntity.setDrId(mPaintInfo.getPatientId());
-        List<DoctorRegImgEntity> imageList = new ArrayList<>();
-        imageList.add(imageEntity);
-        doctorImagSaveRequestEntity.setDoctorRegImgs(imageList);
-        String json = mGson.toJson(doctorImagSaveRequestEntity);*/
+
+        PatientRegImgImgsInfo image = new PatientRegImgImgsInfo();
+        image.setCertNO(mSocialSecurityNumber);
+        image.setImgType(3);
+        image.setImgPath(mSavePath);
+        PatientRegImgListInfo listInfo = new PatientRegImgListInfo();
+        listInfo.setPatientId(mPaintInfo.getPatientId());
+        List<PatientRegImgImgsInfo> list = new ArrayList<>();
+        list.add(image);
+        listInfo.setPatientRegImgImgs(list);
+        String json = mGson.toJson(listInfo);
         loading(true);
-        mMyOkhttp.post().url(HttpUrl.DoctorImagSave).jsonParams("").tag(this).enqueue(new GsonResponseHandler<Entity>() {
+        mMyOkhttp.post().url(HttpUrl.PatientImagSave).jsonParams(json).tag(this).enqueue(new GsonResponseHandler<Entity>() {
             @Override
             public void onSuccess(int statusCode, Entity entity) {
                 LoadDialog.clear();
                 if (entity.getCode() == 0) {
                     toast(getString(R.string.submitSuccess));
                     EventBus.getDefault().postSticky(mSocialSecurityNumber);
+                    FillSocialSecurityInformation.this.finish();
                 } else {
                     toast(entity.getMessage());
                 }
@@ -173,30 +179,21 @@ public class FillSocialSecurityInformation extends BasicActivity implements Sele
     @Override
     protected void initData() {
         obtainSocialSecurity();
-        showPaintInfo();
+
     }
 
     private void obtainSocialSecurity() {
-        Map<String, String> headMap = new HashMap<>();
-        headMap.put("Authorization", SpUtils.getString(Contants.Token));
-        HashMap<String, String> params = new HashMap<>();
-        params.put("DrId", String.valueOf(SpUtils.getString(Contants.Id)));
+        String url = HttpUrl.QueryPatientSocialByPatientId + "?PatientId=" + mPaintInfo.getPatientId();
+
         loading(true);
-        mMyOkhttp.get().url(HttpUrl.QueryDoctorRegImagByDrId).headers(headMap).params(params).tag(this).enqueue(new GsonResponseHandler<DocQualificationEntity>() {
+        mMyOkhttp.get().url(url).tag(this).enqueue(new GsonResponseHandler<SocialSecurityInfo>() {
             @Override
-            public void onSuccess(int statusCode, DocQualificationEntity response) {
+            public void onSuccess(int statusCode, SocialSecurityInfo response) {
                 LoadDialog.clear();
                 if (response.getCode() == 0) {
-                    mList = response.getData();
-                    int len = mList.size();
-                    for (int i = 0; i < len; i++) {
-                        DocQualificationEntity.DataBean bean = mList.get(i);
-                        if (bean.getImgType() == 8) {//社保证
-                            mSocialSecurityInfo = new SocialSecurityInfo();
-                            mSocialSecurityInfo.setIdNumber(bean.getNumber());
-                            mSocialSecurityInfo.setImagePath(bean.getImgPath());
-                            mSocialSecurityInfo.setType(bean.getImgType());
-                        }
+                    if (response.getData() != null) {
+                        mSocialSecurityInfo = response.getData();
+                        showPaintInfo();
                     }
                 }
 

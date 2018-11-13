@@ -31,7 +31,7 @@ public enum UploadPictureUitl {
             protected void onPostExecute(String s) {
                 Map<String, String> map = new HashMap<>();
                 map.put("Base64Str", s);
-                MyApplication.getInstance().getmMyOkHttp().post().url(HttpUrl.updatePhoto).params(map).tag(this).enqueue(new GsonResponseHandler<ResponseEntity<PicturePathEntity>>() {
+                MyApplication.getInstance().getmMyOkHttp().post().url(HttpUrl.PatientImagUpload).params(map).tag(this).enqueue(new GsonResponseHandler<ResponseEntity<PicturePathEntity>>() {
                     @Override
                     public void onSuccess(int statusCode, ResponseEntity<PicturePathEntity> entituy) {
                         mCallBack.success(entituy);

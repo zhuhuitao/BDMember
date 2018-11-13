@@ -31,6 +31,7 @@ import com.google.gson.Gson;
 import com.lxq.okhttp.response.GsonResponseHandler;
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
+import com.newdjk.bdmember.bean.AddressEntity;
 import com.newdjk.bdmember.bean.Entity;
 import com.newdjk.bdmember.bean.ImDoctorEntity;
 import com.newdjk.bdmember.bean.PaintListEntity;
@@ -38,6 +39,7 @@ import com.newdjk.bdmember.bean.ServicePackageDetailEntity;
 import com.newdjk.bdmember.bean.ServicePackageEntity;
 import com.newdjk.bdmember.ui.activity.ChatActivity;
 import com.newdjk.bdmember.ui.activity.contract.FamilyMedicalTeam;
+import com.newdjk.bdmember.ui.activity.contract.FillSocialSecurityInformation;
 import com.newdjk.bdmember.utils.Contants;
 import com.newdjk.bdmember.utils.HttpUrl;
 import com.newdjk.bdmember.utils.ImageBase64;
@@ -172,6 +174,9 @@ public class WebViewActivity extends BasicActivity {
                 case 24:
                     mUrl = mUrl + "hospital";
                     break;
+                case 25:
+                    mUrl = mUrl +"address?chooseFor=1";
+                    break;
             }
 
             LogUtils.e("========" + type);
@@ -243,14 +248,28 @@ public class WebViewActivity extends BasicActivity {
             }
         });
 
+        mWebView.registerHandler("chooseAddress", new BridgeHandler() {
+            @Override
+            public void handler(String data, CallBackFunction function) {
+                AddressEntity.DataBean address = mGson.fromJson(data,AddressEntity.DataBean.class);
+                EventBus.getDefault().postSticky(address);
+                finish();
+            }
+        });
+
         mWebView.registerHandler("servicePackage", new BridgeHandler() {
             @Override
             public void handler(String data, CallBackFunction function) {
                 if (TextUtils.isEmpty(data)) return;
                 ServicePackageDetailEntity entity = mGson.fromJson(data, ServicePackageDetailEntity.class);
-                Intent i = new Intent(WebViewActivity.this, FamilyMedicalTeam.class);
-                i.putExtra("packageDetailEntity", entity);
-                toActivity(i);
+                Intent intent = null;
+                if (Contants.TYPE == 1){
+                   // intent = new Intent(WebViewActivity.this,FillSocialSecurityInformation.class);
+                }else if (Contants.TYPE == 2){
+                    intent = new Intent(WebViewActivity.this, FamilyMedicalTeam.class);
+                    intent.putExtra("packageDetailEntity", entity);
+                }
+                toActivity(intent);
                 WebViewActivity.this.noAnimFinish();
             }
         });

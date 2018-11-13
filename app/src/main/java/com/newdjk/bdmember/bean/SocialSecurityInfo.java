@@ -1,31 +1,64 @@
 package com.newdjk.bdmember.bean;
 
 public class SocialSecurityInfo {
-    private String idNumber;
-    private int type;
-    private String imagePath;
 
-    public String getIdNumber() {
-        return idNumber;
+    /**
+     * Code : 0
+     * Message :
+     * Data : {"SocialNum":null,"ImgPath":null}
+     */
+
+    private int Code;
+    private String Message;
+    private DataBean Data;
+
+    public int getCode() {
+        return Code;
     }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+    public void setCode(int Code) {
+        this.Code = Code;
     }
 
-    public int getType() {
-        return type;
+    public String getMessage() {
+        return Message;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setMessage(String Message) {
+        this.Message = Message;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public DataBean getData() {
+        return Data;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setData(DataBean Data) {
+        this.Data = Data;
+    }
+
+    public static class DataBean {
+        /**
+         * SocialNum : null
+         * ImgPath : null
+         */
+
+        private String SocialNum;
+        private String ImgPath;
+
+        public String getSocialNum() {
+            return SocialNum;
+        }
+
+        public void setSocialNum(String SocialNum) {
+            this.SocialNum = SocialNum;
+        }
+
+        public String getImgPath() {
+            return ImgPath;
+        }
+
+        public void setImgPath(String ImgPath) {
+            this.ImgPath = ImgPath;
+        }
     }
 }

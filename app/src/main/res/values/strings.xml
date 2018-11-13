@@ -156,4 +156,9 @@
     <string name="socialSecurityInfo">社保信息</string>
     <string name="noPermissionTips">用户没有允许需要的权限，使用可能会受到限制！</string>
     <string name="submitSuccess">提交成功</string>
+    <string name="scanDes">将二维码放入框内即可自动扫描</string>
+    <string name="scan">扫一扫</string>
+    <string name="openLight">开启照明</string>
+    <string name="pleaseSelectAddress">请选择收货地址</string>
+    <string name="pleaseSelectPaint">请选择就诊人</string>
 </resources>

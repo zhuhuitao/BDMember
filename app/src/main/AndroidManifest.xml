@@ -117,7 +117,12 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.activity.ScanActivity" />
+        <activity
+            android:name=".scan.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

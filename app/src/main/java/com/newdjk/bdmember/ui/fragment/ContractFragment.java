@@ -22,6 +22,7 @@ import com.newdjk.bdmember.ui.activity.contract.ServicePackageDetail;
 import com.newdjk.bdmember.ui.activity.mine.WebViewActivity;
 import com.newdjk.bdmember.ui.adapter.ContractServicePackageAdapter;
 import com.newdjk.bdmember.utils.BaseCallback;
+import com.newdjk.bdmember.utils.Contants;
 import com.newdjk.bdmember.utils.ContractRequestUtil;
 import com.newdjk.bdmember.utils.HomeItemClickListener;
 import com.newdjk.bdmember.widget.CommonMethod;
@@ -76,7 +77,6 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
         mPages = 1;
         mIndex = 3;
         initRecyclerView();
-
     }
 
     @Override
@@ -178,6 +178,7 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
 
     @Override
     public void homeItemListener(int type, Object obj) {
+        Contants.TYPE = type;
         ServicePackageEntity.DataBean.ReturnDataBean bean = (ServicePackageEntity.DataBean.ReturnDataBean) obj;
         Intent intent = new Intent(getContext(), WebViewActivity.class);
         intent.putExtra("type", 21);
@@ -194,11 +195,13 @@ public class ContractFragment extends BasicFragment implements HomeItemClickList
         mBasePackageList = new ArrayList<>();
         mBasePackageAdapter = new ContractServicePackageAdapter(mBasePackageList, this);
         contractBaseServicePackageRv.setLayoutManager(new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
+        mBasePackageAdapter.setType(2);
         contractBaseServicePackageRv.setAdapter(mBasePackageAdapter);
 
         mSpecialPackageList = new ArrayList<>();
         mSpecialPackageAdapter = new ContractServicePackageAdapter(mSpecialPackageList, this);
         contractSpecialServicePackageRv.setLayoutManager(new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
+        mSpecialPackageAdapter.setType(1);
         contractSpecialServicePackageRv.setAdapter(mSpecialPackageAdapter);
     }
 }

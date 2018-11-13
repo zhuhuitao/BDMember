@@ -1,16 +1,26 @@
 package com.newdjk.bdmember.ui.activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.newdjk.bdmember.R;
 import com.newdjk.bdmember.basic.BasicActivity;
-import com.uuzuche.lib_zxing.activity.CaptureFragment;
-import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.newdjk.bdmember.scan.activity.CaptureFragment;
+import com.newdjk.bdmember.scan.activity.CodeUtils;
+
 
 public class ScanActivity extends BasicActivity {
+
+    private final int REQUEST_IMAGE = 001;
+
     @Override
     protected int initViewResId() {
         return R.layout.activity_scan;
@@ -34,18 +44,27 @@ public class ScanActivity extends BasicActivity {
 
     @Override
     protected void initListener() {
+//        btnOpenAlbum.setOnClickListener(v -> {
+//            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//            intent.addCategory(Intent.CATEGORY_OPENABLE);
+//            intent.setType("image/*");
+//            startActivityForResult(intent, REQUEST_IMAGE);
+//        });
+
 
     }
 
     @Override
     protected void initData() {
-
+        TextView tv = getSupportFragmentManager().findFragmentById(R.id.ff).getView().findViewById(R.id.tv_des);
+        tv.setText("测试东西");
     }
 
     @Override
     protected void otherViewClick(View view) {
 
     }
+
 
 
     /**
