@@ -204,6 +204,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         ObtainHealthGovernment();
     }
 
+    //获取健康政务数据
     private void ObtainHealthGovernment() {
         HashMap<String, String> params = new HashMap<>();
         params.put("OrgId", "1");
@@ -237,6 +238,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         });
     }
 
+    //获取公益活动数据
     private void obtainPublicActivitiesDate() {
         HashMap<String, String> params = new HashMap<>();
         params.put("OrgId", "1");
@@ -267,6 +269,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         });
     }
 
+    //获取热门服务数据
     private void obtainHotServiceDate() {
         String bannerUrl = HttpUrl.QueryAdBannerInfo + "?classId=" + 5 + "";
         mMyOkhttp.get().url(bannerUrl).tag(this).enqueue(new GsonResponseHandler<AdBannerInfo>() {
@@ -283,6 +286,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         });
     }
 
+    //处理热门服务数据
     private void handHotServiceData(List<AdBannerInfo.DataBean> data) {
         if (data != null && data.size() == 3) {
             if (homeSmartRefreshLayout.isRefreshing()) {
@@ -304,6 +308,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
     }
 
+    //获取广告位
     private void obtainAdvertiseDate() {
         String bannerUrl = HttpUrl.QueryAdBannerInfo + "?classId=" + 3 + "";
         mMyOkhttp.get().url(bannerUrl).tag(this).enqueue(new GsonResponseHandler<AdBannerInfo>() {
@@ -472,10 +477,12 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
 
     private void initHomeRecyclerView() {
+        //视频问诊 图文问诊数据列表
         homeRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         HomeRecyclerViewFirstAdapter adapter = new HomeRecyclerViewFirstAdapter(getContext(), this);
         homeRecyclerView.setAdapter(adapter);
 
+        //孕妈recyclerViwe
         homePregnantMotherServicePackageRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         DividerItemDecoration divider = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
         divider.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.custom_divider));
@@ -483,19 +490,21 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         mHomePregnantMotherServicePackageAdapter = new HomePregnantMotherServicePackageAdapter(new ArrayList<>());
         homePregnantMotherServicePackageRecyclerView.setAdapter(mHomePregnantMotherServicePackageAdapter);
 
+        //名医
         mHomeRecommendationDoctorList = new ArrayList<>();
         mHomeRecommendationFamousDoctorAdapter = new HomeRecommendationFamousDoctorAdapter(mHomeRecommendationDoctorList, this);
         mHomeRecommendationFamousDoctorAdapter.setmType(1);
         homeRecommendationFamousDoctorRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         homeRecommendationFamousDoctorRecyclerView.setAdapter(mHomeRecommendationFamousDoctorAdapter);
 
-
+        //护士
         mHomeRecommendationNurseList = new ArrayList<>();
         mHomeRecommendationFamousNurseAdapter = new HomeRecommendationFamousDoctorAdapter(mHomeRecommendationNurseList, this);
         mHomeRecommendationFamousNurseAdapter.setmType(2);
         homeRecommendationFamousNurseRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false));
         homeRecommendationFamousNurseRecyclerView.setAdapter(mHomeRecommendationFamousNurseAdapter);
 
+        //公益活动
         mPublicActivitiesList = new ArrayList<>();
         mHomePublicActivitiesAdapter = new HomePublicActivitiesAdapter(mPublicActivitiesList, getContext(), this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -504,6 +513,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
         homePublicActivitiesRecyclerView.setAdapter(mHomePublicActivitiesAdapter);
 
 
+        //健康政务
         mHealthGovernmentDateList = new ArrayList<>();
         LinearLayoutManager healthGovernment = new LinearLayoutManager(getContext());
         healthGovernment.setOrientation(LinearLayoutManager.VERTICAL);
@@ -524,7 +534,7 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
         switch (position) {
             case 0://视频问诊
-                intent.putExtra("type", 15);;
+                intent.putExtra("type", 15);
                 intent.putExtra("code", 1102);
                 break;
             case 1://图文问诊
@@ -628,23 +638,5 @@ public class HomeFragment extends BasicFragment implements ItemOnClickCall, Home
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
-            //处理扫描结果（在界面上显示）
-            if (null != data) {
-                Bundle bundle = data.getExtras();
-                if (bundle == null) {
-                    return;
-                }
-                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-                    String result = bundle.getString(CodeUtils.RESULT_STRING);
-                    toast("解析结果:" + result);
-                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    toast("解析结果:" + "失败");
-                }
-            }
-        }
-    }
+
 }
